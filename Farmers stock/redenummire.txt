@@ -1,0 +1,22 @@
+adaugaanunt.php		to 		add.php
+adaugaanuntrez.php		to  addeffect.php
+adduser.php		-not changed
+belele.php		to 			trouble.php
+cautarerez.php		to		searchresult.php
+cerereadauga.php		to		addrequest.php
+cerereadaugarez.php		to 		addrequestresult.php
+cerereafiseaza.php 		to 		showrequest.php
+cereri.php			to 		request.php
+cnatanimala.php  	to 		animalcategory.php
+cnatvegetala.php 	to 		nonanimalcategory.php
+connect_db.php		-not changed
+contact.php		-not changed
+cumparatori.php		to 		buyers.php
+enc.php 	-not changed
+infouser v 3 print cu js.php		to 		userinfo3.php
+infouser.php		to 		userinfo.php
+infouser2.php		to		userinfo2.php
+loginuseri.php		to		userslogin.php
+vanzatori.php		to 		sellers.php
+sibiu.php		to 			farmers_stock.php
+index.php		-not changed
