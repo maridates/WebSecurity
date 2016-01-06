@@ -25,8 +25,9 @@ if (!isset($_SESSION['user']))
 </head>
 <?php
 include "connect_db.php";
-$sql="select `ID_user` from `users` where username='$_SESSION[user]'";
+$sql="select `ID_user` from `users` where username=:sess";
 $sth=$dbh->prepare($sql);
+$sth->bindParam(":sess",$_SESSION['user']);
 $sth->execute();
 $res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if (mysql_num_rows($res)==0)
@@ -57,8 +58,11 @@ if (!trim($anunt))
 	print "<meta http-equiv='refresh' content='2;url=add.php'>";
 	die();
 	}
-$q="INSERT INTO ads (id_field, id_user, ad_text) VALUES('$id_domain', '$_SESSION[id_u]','$anunt')";
+$q="INSERT INTO ads (id_field, id_user, ad_text) VALUES(:id_field, :sess, :ad)";
 $sth=$dbh->prepare($q);
+$sth->bindParam(":id_field",$id_domain);
+$sth->bindParam(":sess",$_SESSION['id_u']);
+$sth->bindParam(":ad",$anunt);
 $sth->execute();
 //query($q);
 ?>

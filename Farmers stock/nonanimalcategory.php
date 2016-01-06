@@ -37,8 +37,9 @@ else
 	print "<tr><td align='right' class='bk'><b>User:</b></td><td class='bk'><b>Ad:</b></td></tr>";
 	for ($i=0;$i<$j;$i++)
 		{
-		$sql="select `field_name` from `farmers_stock`.`field` where id_field='$id_cat[$i]'";
+		$sql="select `field_name` from `farmers_stock`.`field` where id_field=:id_field";
 			$sth=$dbh->prepare($sql);
+			$sth->bindParam(":id_field",$id_cat[$i]);
 			$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
 		$dom=$sth->fetch(PDO::FETCH_ASSOC);//=mysql_fetch_row($res);
 		$sql="select `username`, `ad_text` from `farmers_stock`.`ads`, `farmers_stock`.`users` where id_field=$id_cat[$i] and ID_user=id_user";

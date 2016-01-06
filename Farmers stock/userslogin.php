@@ -43,7 +43,8 @@ if (!trim($Password))
 	}
 	include "connect_db.php";
 	$Password=hash("sha256",$Password);
-	$sql="select `ID_user`, `username`, `Password` from `farmers_stock`.`users` where `username`='$User';";
+	$sql="select `ID_user`, `username`, `Password` from `farmers_stock`.`users` where `username`=:username";
+	$sth->bindParam(":username",$User);
 	$sth=$dbh->prepare($sql);
 	//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 	$sth->execute();

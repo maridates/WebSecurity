@@ -28,7 +28,8 @@ if (!trim($usr))
 </tr>
 <?
 include "connect_db.php";
-$sql="select last_name, first_name, address, phone from farmers_stock.users where username=".$usr;
+$sql="select last_name, first_name, address, phone from farmers_stock.users where username=:username";
+$sth->bindParam(":username",$usr);
 $sth=$dbh->prepare($sql);
 $sth->execute();
 $res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
