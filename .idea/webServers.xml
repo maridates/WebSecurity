@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2890d6c7-3b05-4415-849c-3ff802eee5ee" name="WebSecurity" url="http://localhost">
+        <fileTransfer mountedRoot="C:\MAMP\htdocs\WebSecurity" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

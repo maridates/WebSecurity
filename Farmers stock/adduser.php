@@ -39,7 +39,7 @@ if (!isset ($_POST['submit']))
 		</tr>
 		<TR>
 			<TD align="right" class="bkl"><FONT face="verdana" size=2><b>Surname:</b></FONT></TD>
-			<TD class="bkl">&nbsp;<input type="text" name="Surname" size="30"></FONT></TD>
+			<TD class="bkl">&nbsp;<input type="text" name="Surname" size="30"></TD>
 		</TR>
 		<tr>
 			<TD align="right" class="bkl"><FONT face="verdana" size=2><b>Firstname:</b></FONT></TD>

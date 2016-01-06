@@ -8,7 +8,7 @@
       <p align="center"><strong><font color="#FFFFFF" size="4" face="Comic Sans MS"> 
         Lygten 37 2400 Copenhagen NV</font></strong></p>
       <p align="center"><strong><font color="#FFFFFF" size="4" face="Comic Sans MS">or email to </font></strong> <strong><font color="#FFFFFF" size="5" face="Comic Sans MS"><a href="mailto:mari7q03@stud.kea.dk">MAIL</a></font></strong></p></td>
-    <td width="3%"><img src="pictures/banda_stg.jpg" width="150" height="761"></td>
+
   </tr>
 </table>
 <p>&nbsp;</p>

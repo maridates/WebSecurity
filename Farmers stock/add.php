@@ -26,8 +26,12 @@ if (!isset($_SESSION['user']))
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (2).</p>");
 	}
 include "connect_db.php";
-$sql="select `ID_user` from `users` where username='$_SESSION[user]';";
-$res=mysql_query($sql) or die("<p align='center' class='bk'>Database error.</p>");
+$sql="select `ID_user` from `farmers_stock`.`users` where `username`=:username;";
+$sth=$dbh->prepare($sql_query);
+$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+$sth->execute();
+$res=$sth->fetchAll();
+//$res=mysql_query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if (mysql_num_rows($res)==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
