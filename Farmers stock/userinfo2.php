@@ -29,7 +29,7 @@ if (!trim($usr))
 <?
 include "connect_db.php";
 $sql="select Surname, Firstname, Address, phone from users where username='$usr'";
-$res=mysql_query($sql) or die (mysql_error());
+$res=query($sql) or die (errorInfo());
 if (mysql_num_rows($res)==0)
 	{
 	die();
@@ -40,7 +40,7 @@ else
 		{
 		die ("<p align='center' class='bkl'>Database error.</p>");
 		}
-	$row=mysql_fetch_row($res);
+	$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
 	}
 ?>
 <tr>

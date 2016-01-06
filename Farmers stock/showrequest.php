@@ -19,8 +19,10 @@
 <HR>
 <?php
 include "connect_db.php";
-$interogare = "SELECT * FROM `requests` order by `date` desc";
-$rez = mysql_query ($interogare);
+$interogare = "SELECT * FROM `farmers_stock`.`requests` order by `date` desc";
+$sth=$dbh->prepare($interogare);
+$sth->execute();
+//$rez = query ($interogare);
 $nrRez = mysql_num_rows( $rez );
 if($nrRez == 0)
    echo "No request found!";
@@ -29,7 +31,7 @@ else
 echo "We found $nrRez requests:<BR>";
 echo "<TABLE class='bkl'>";
 for($i=0; $i<$nrRez; $i++) {
- $requests = mysql_fetch_object($rez);
+ $requests =$sth->fetch(PDO::FETCH_OBJ);// mysql_fetch_object($rez);
  echo "<TR><TD class='bk'>".$requests->add."</TD>"; 
  echo "<TD class='bk'>".$requests->date."</TD></TR>"; 
 }

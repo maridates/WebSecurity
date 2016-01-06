@@ -12,7 +12,7 @@ if (!isset($_POST[sub]))
 else
 	{
 	$hash=$_POST[hash];
-	print md5($hash);
+	print hash ("sha256", $hash);
 	print "<br /><a href='enc.php'>Reset</a>";
 	}
 ?>

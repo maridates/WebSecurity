@@ -25,8 +25,10 @@ if (!isset($_SESSION['user']))
 </head>
 <?php
 include "connect_db.php";
-$sql="select `ID_user` from `users` where username='$_SESSION[user]';";
-$res=mysql_query($sql) or die("<p align='center' class='bk'>Database error.</p>");
+$sql="select `ID_user` from `users` where username='$_SESSION[user]'";
+$sth=$dbh->prepare($sql);
+$sth->execute();
+$res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if (mysql_num_rows($res)==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
@@ -37,7 +39,7 @@ else
 		{
 		die("<p align='center' class='bk'>- Error in the database.</p>");
 		}
-	$row=mysql_fetch_row($res);
+	$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
 	if ($row[0]!=$_SESSION['id_u'])
 		{
 		die("<p align='center' class='bk'>- ERROR - on connecting to database. (4)</p>");
@@ -56,7 +58,9 @@ if (!trim($anunt))
 	die();
 	}
 $q="INSERT INTO ads (id_field, id_user, ad_text) VALUES('$id_domain', '$_SESSION[id_u]','$anunt')";
-mysql_query($q);
+$sth=$dbh->prepare($q);
+$sth->execute();
+//query($q);
 ?>
 <body bgcolor="#CCCCCC">
 <p> Your ad was succesful added.</p>

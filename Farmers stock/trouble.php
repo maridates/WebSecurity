@@ -33,8 +33,12 @@ if (!isset($_SESSION[adm]))
 	if (isset ($_POST[submit]))
 		{
 		include "connect_db.php";
-		$sql="select * from admin";
-		$res=mysql_query($sql) or die (mysql_error());
+		$sql="select * from farmers_stoch.admin";
+			$sth=$dbh->prepare($sql);
+			//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+			$sth->execute();
+			$res=$sth->fetchAll();
+		//$res=query($sql) or die (errorInfo());
 		if (mysql_num_rows($res)==0)
 			{
 			die();
@@ -49,8 +53,8 @@ if (!isset($_SESSION[adm]))
 				{
 				$adm=$_POST[adm];
 				$pss=$_POST[pss];
-				$pss=md5($pss);
-				$row=mysql_fetch_row($res);
+				$pss=hash("sha256",$pss);
+					$row = $sth->fetch(PDO::FETCH_ASSOC);//$row=mysql_fetch_row($res);
 				if ($row[0]!=$adm)
 					{
 					$_SESSION[count]++;
@@ -103,8 +107,11 @@ else
 			{
 			die();
 			}
-		$sql="select * from `admin`";
-		$res=mysql_query($sql) or die (mysql_error());
+		$sql="select * from `farmers_stock`.`admin`";
+$sth=$dbh->prepare($sql);
+$sth->execute();
+$res=$sth->query($sql);
+		//$res=query($sql) or die (errorInfo());
 		if (mysql_num_rows($res)==0)
 			{
 			die();
@@ -117,7 +124,7 @@ else
 				}
 			else
 				{
-				$row=mysql_fetch_row($res) or die();
+				$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res) or die();
 				if ($_SESSION[adm]!=$row[0])
 					{
 					die();
@@ -149,9 +156,11 @@ else
 			$domain=$_GET[domain];
 			if (strlen($domain)==0)
 				{
-				$sql="select id_field, field_name from field";
-				$res=mysql_query($sql) or die (mysql_error());
-				while ($row=mysql_fetch_row($res))
+				$sql="select id_field, field_name from farmers_stock.field";
+					$sth=$dbh->prepare($sql);
+					$sth->execute();
+					$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
+				while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
 					{
 					print "<a href='trouble.php?action=ads&domain=$row[0]'>$row[1]</a><br />";
 					}
@@ -162,20 +171,24 @@ else
 					{
 					$id=$_GET[id];
 					$domain=$_GET[domain];
-					$sql="delete from ads where ID_req='$id'";
-					mysql_query($sql) or die (mysql_error());
+					$sql="delete from farmers_stock.ads where ID_req='$id'";
+						$sth=$dbh->prepare($sql);
+						$sth->execute();
+						$res=$sth->query($sql);//query($sql) or die (errorInfo());
 					print "<meta http-equiv='refresh' content='0;url=trouble.php?action=ads&domain=$domain'>";
 					die();
 					}
 				print " <a href='trouble.php?action=ads'>ads</a><br />";
-				$sql="select ad_text, ID_ad from ads where id_field='$domain'";
-				$res=mysql_query($sql) or die (mysql_error());
+				$sql="select ad_text, ID_ad from farmers_stock.ads where id_field='$domain'";
+					$sth=$dbh->prepare($sql);
+					$sth->execute();
+					$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
 				print "<table class='bkl'>";
 				if (mysql_num_rows($res)==0)
 					print "<tr><td class='bk' align='center'>No ads!</td></tr>";
 				else
 					{
-					while ($row=mysql_fetch_row($res))
+					while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
 						{
 						print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=ads&domain=$domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_anunt' value='Delete'></td></form></tr>";
 						}
@@ -190,13 +203,17 @@ else
 			if (isset ($_POST[del_request]))
 				{
 				$id=$_GET[id];
-				$sql="delete from requests where ID_req=$id";
-				mysql_query($sql) or die (mysql_error());
+				$sql="delete from farmers_stock.requests where ID_req=$id";
+					$sth=$dbh->prepare($sql);
+					$sth->execute();
+					$res=$sth->query($sql);//query($sql) or die (errorInfo());
 				print "<meta http-equiv='refresh' content='0;url=trouble.php?action=requests'>";
 				die();
 				}
-			$sql="select add, ID_req from requests";
-			$res=mysql_query($sql) or die(mysql_error());
+			$sql="select add, ID_req from farmers_stock.requests";
+				$sth=$dbh->prepare($sql);
+				$sth->execute();
+				$res=$sth->query($sql);//$res=query($sql) or die(errorInfo());
 			print "<table class='bkl'>";
 			if (mysql_num_rows($res)==0)
 				{
@@ -204,7 +221,7 @@ else
 				}
 			else
 				{
-				while($row=mysql_fetch_row($res))
+				while($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
 					{
 					print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=requests&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_request' value='Delete'></td></form></tr>";
 					}
@@ -223,22 +240,22 @@ else
 				$dom=$_POST[dom];
 				$tip=$_POST[tip];
 				$sql="insert into field (field_name, field_type) values ('$dom', '$tip')";
-				mysql_query($sql) or die(mysql_error());
+				query($sql) or die(errorInfo());
 				die("<meta http-equiv='refresh' content='0;url=trouble.php?action=domain'>");
 				}
 			if (isset($_POST[del_dom]))
 				{
 				$id=$_GET[id];
 				$sql="delete from field where id_field=$id";
-				mysql_query($sql) or die (mysql_error());
+				query($sql) or die (errorInfo());
 				$sql="delete from ads where id_field=$id";
-				mysql_query($sql) or die (mysql_error());
+				query($sql) or die (errorInfo());
 				print "<meta http-equiv='refresh' content='0;url=trouble.php?action=domain'>";
 				die();
 				}
 			print "<table class='bkl'>";
 			$sql="select nume_domain, id_domain from domain";
-			$res=mysql_query($sql) or die(mysql_error());
+			$res=query($sql) or die(errorInfo());
 			if (mysql_num_rows($res)==0)
 				{
 				print "<tr><td class='bk' align='center'>There are no fields!</td></tr>";
@@ -246,7 +263,7 @@ else
 			else
 				{
 				print "<tr><td class='bk' align='center' colspan='2'><b>Fields:</b></td></tr>";
-				while ($row=mysql_fetch_row($res))
+				while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
 					{
 					print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_dom' value='Delete'></td></form></tr>";
 					}
@@ -260,14 +277,14 @@ else
 				{
 				$id=$_GET[id];
 				$sql="delete from users where ID_user=$id";
-				mysql_query($sql) or die (mysql_error());
+				query($sql) or die (errorInfo());
 				$sql="delete from ads where id_user=$id";
-				mysql_query($sql) or die (mysql_error());
+				query($sql) or die (errorInfo());
 				print "<meta http-equiv='refresh' content='0;url=trouble.php?action=users'>";
 				die();
 				}
 			$sql="select username, ID_user from users";
-			$res=mysql_query($sql) or die(mysql_error());
+			$res=query($sql) or die(errorInfo());
 			print "<table class='bkl'>";
 			if (mysql_num_rows($res)==0)
 				{
@@ -275,7 +292,7 @@ else
 				}
 			else
 				{
-				while($row=mysql_fetch_row($res))
+				while($row=$sth->fetch(PDO::FETCH_ASSOC))//;mysql_fetch_row($res))
 					{
 					print "<tr><td class='bk'><a href='userinfo.php?user=$row[0]' target='_blank'>$row[0]</a></td><form action='trouble.php?action=users&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_pers' value='Delete'></td></form></tr>";
 					}

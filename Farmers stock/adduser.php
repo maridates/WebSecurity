@@ -78,8 +78,12 @@ else
 		die();
 		}
 	include "connect_db.php";
-	$sql="select `username` from `users` where `username`='$username'";
-	$res=mysql_query($sql) or die (mysql_error());
+	$sql="select `username` from `farmers_stock`.`users` where `username`='$username'";
+		$sth=$dbh->prepare($sql);
+		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+		$sth->execute();
+		$res=$sth->fetchAll();
+	//$res=query($sql) or die (errorInfo());
 	if (mysql_num_rows($res)!==0)
 		{
 		print "<p align='center' class='bk'>Username already registered !<br />- ERROR -</p>";
@@ -128,9 +132,12 @@ else
 		print "<meta http-equiv='refresh' content='2;url=adduser.php'>";
 		die();
 		}
-	$Password=md5($Password);
-	$interogare="INSERT INTO users (username, password, last_name, first_name, address, phone) VALUES ('$username', '$Password', '$Surname', '$Firstname', '$Address', '$phone')"; 
-	mysql_query($interogare) or die (mysql_error());
+	$Password=hash("sha256",$Password);
+	$interogare="INSERT INTO farmers_stock.users (username, password, last_name, first_name, address, phone) VALUES ('$username', '$Password', '$Surname', '$Firstname', '$Address', '$phone')";
+		$sth=$dbh->prepare($interogare);
+		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+		$sth->execute();
+		//query($interogare) or die (errorInfo());
     print '<p align="center" class="bk">The dates were inserted!';
 	print '<br /><a href="javascript:parent.close();">Close window -  go to your account</a></p>';
 	}

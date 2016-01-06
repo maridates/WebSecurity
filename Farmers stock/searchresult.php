@@ -21,10 +21,13 @@
 $cautare = addslashes ( trim( $HTTP_POST_VARS["cautare"] ) );
 echo "We are looking for: ".$cautare."<BR>";
 include "connect_db.php";
-$interogare = "SELECT `id_field`, `ID_user`, `ad_text` FROM `ads` ";
+$interogare = "SELECT `id_field`, `ID_user`, `ad_text` FROM `farmers_stock`.`ads` ";
 if( $cautare!="") 
      $interogare = $interogare."WHERE `anunt` LIKE '%".$cautare."%'";
-$rez = mysql_query ($interogare);
+$sth=$dbh->prepare($sql);
+$sth->execute();
+$rez=$sth->query($interogare);
+//$rez = query ($interogare);
 if (!$rez)
      die("Search error!");
 $nrRez = mysql_num_rows( $rez );
@@ -41,14 +44,20 @@ else
 		<td class='bk'>Ad</td>
 	</tr>
 	";
-	while ($row=mysql_fetch_row($rez))
+	while ($row=$sth->fetch(PDO::FETCH_ASSOC)//mysql_fetch_row($rez))
 		{
-		$sql="select `username` from `users` where `ID_user`=$row[1]";
-		$res=mysql_query($sql) or die (mysql_error());
-		$pers=mysql_fetch_row($res);
-		$sql="select `field_name` from `field` where `id_field`=$row[0]";
-		$res=mysql_query($sql) or die (mysql_error());
-		$domain=mysql_fetch_row($res) or die (mysql_error());
+		$sql="select `username` from `farmers_stock`.`users` where `ID_user`=".$row[1];
+		$sth=$dbh->prepare($sql);
+		$sth->execute();
+		$res=$sth->query($sql);
+		//$res=query($sql) or die (errorInfo());
+		$pers=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
+		$sql="select `field_name` from `farmers_stock`.`field` where `id_field`=".$row[0];
+		$sth=$dbh->prepare($sql);
+		$sth->execute();
+		$res=$sth->query($sql);
+		//$res=query($sql) or die (errorInfo());
+		$domain=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res) or die (errorInfo());
 		print "<tr>";
 		print "<td class='bk'><a href='userinfo.php?user=$pers[0]' target='_blank'>".$pers[0]."</td>";
 		print "<td class='bk'>".$domain[0]."</td>";

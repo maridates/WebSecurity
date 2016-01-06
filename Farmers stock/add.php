@@ -27,11 +27,11 @@ if (!isset($_SESSION['user']))
 	}
 include "connect_db.php";
 $sql="select `ID_user` from `farmers_stock`.`users` where `username`=:username;";
-$sth=$dbh->prepare($sql_query);
+$sth=$dbh->prepare($sql);
 $sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 $sth->execute();
 $res=$sth->fetchAll();
-//$res=mysql_query($sql) or die("<p align='center' class='bk'>Database error.</p>");
+//$res=query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if (mysql_num_rows($res)==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
@@ -42,7 +42,7 @@ else
 		{
 		die("<p align='center' class='bk'>- Error - on the database.</p>");
 		}
-	$row=mysql_fetch_row($res);
+		$row = $sth->fetch(PDO::FETCH_ASSOC);//$row=mysql_fetch_row($res);
 	if ($row[0]!=$_SESSION['id_u'])
 		{
 		die("<p align='center' class='bk'>- ERROR - on connecting to database. (4)</p>");
@@ -58,7 +58,10 @@ if (isset($_POST['logout']))
 if (isset($_POST['submit']))
 	{
 	$ID_req=$_GET['id'];
-	mysql_query("delete from `ads` where `ID_req`='$ID_req'") or die (mysql_error());
+	$sql="delete from `farmers_stoch`.`ads` where `ID_req`='$ID_req'";
+	//query("delete from `farmers_stoch`.`ads` where `ID_req`='$ID_req'") or die (errorInfo());
+		$sth=$dbh->prepare($sql);
+		$sth->execute();
 	print "<meta http-equiv='refresh' content='0;url=add.php'>";
 	}
 ?>
@@ -70,9 +73,14 @@ if (isset($_POST['submit']))
     <TD align="right">Field:</TD>
 	<TD><select name='ID_field'>
 <?php
-	$sql="select * from field";
-	$res=mysql_query($sql) or die(mysql_error());
-	while($row=mysql_fetch_row($res))
+$sql="select * from farmers_stoch.field";
+$sth=$dbh->prepare($sql);
+//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+$sth->execute();
+$res=$sth->fetchAll();
+
+	//$res=query($sql) or die(errorInfo());
+	while($row = $sth->fetch(PDO::FETCH_ASSOC))
 		{
 		print "<option value='$row[0]'>$row[1]</option>";
 		}
@@ -89,8 +97,10 @@ if (isset($_POST['submit']))
 </form>
 <hr>
 <?php
-$sql="select `ID_req`, `ID_field`, `ad_text` from ads where id_user='$_SESSION[id_u]'";
-$res=mysql_query($sql) or die (mysql_error());
+$sql="select `ID_req`, `ID_field`, `ad_text` from `farmers_stoch`.`ads` where id_user='$_SESSION[id_u]'";
+$sth=$dbh->prepare($sql);
+//$sth->execute();
+$res=$sth->query($sql);
 if (mysql_num_rows($res)==0)
 	{
 	die("You have no ad published.");
@@ -99,12 +109,15 @@ else
 	{
 	print "Existing ads:";
 	}
-while ($row=mysql_fetch_row($res))
+while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 	{
 	print "<hr>";
-	$sql="select `field_name` from `field` where `ID_field`='$row[1]'";
-	$rez=mysql_query($sql);
-	$roq=mysql_fetch_row($rez);
+	$sql="select `field_name` from `farmers_stoch`.`field` where `ID_field`='$row[1]'";
+		$sth=$dbh->prepare($sql);
+		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+		$sth->execute();
+		//$res=$sth->fetchAll();
+	$roq=$sth->fetch(PDO::FETCH_ASSOC);
 	print "<b>Field:</b> ".$roq[0]."<br /><b>Ad:</b>".$row[2]."<br /><br />";
 	print "<form action='add.php?id=$row[0]' method='post'><input type='submit' name='submit' value='Delete'></form>";
 	}

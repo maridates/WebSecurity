@@ -14,8 +14,9 @@ if($anunt=="")
      die("You have not inserted an ad");
 include "connect_db.php";
 $date=date("D M d, Y H:i:s");
-$interogare = "INSERT INTO requests (`add`, `date`) VALUES ('$anunt', '$date')";
-$rez = mysql_query ($interogare);
+$interogare = "INSERT INTO farmers_stock.requests (`add`, `date`) VALUES ('$anunt', '$date')";
+$sth=$dbh->prepare($interogare);
+$rez = $sth->query($interogare);
 if (!$rez)
      die("Error on inserting!");
 echo "Succesful. Inserted ads: ".mysql_affected_rows()."<BR>";

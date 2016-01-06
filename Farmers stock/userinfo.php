@@ -28,8 +28,10 @@ if (!trim($usr))
 </tr>
 <?
 include "connect_db.php";
-$sql="select last_name, first_name, address, phone from users where username='$usr'";
-$res=mysql_query($sql) or die (mysql_error());
+$sql="select last_name, first_name, address, phone from farmers_stock.users where username=".$usr;
+$sth=$dbh->prepare($sql);
+$sth->execute();
+$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
 if (mysql_num_rows($res)==0)
 	{
 	die();
@@ -40,7 +42,7 @@ else
 		{
 		die ("<p align='center' class='bkl'>Database error.</p>");
 		}
-	$row=mysql_fetch_row($res);
+	$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
 	}
 ?>
 <tr>
