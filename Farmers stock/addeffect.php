@@ -30,13 +30,13 @@ $sth=$dbh->prepare($sql);
 $sth->bindParam(":sess",$_SESSION['user']);
 $sth->execute();
 $res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
-if (mysql_num_rows($res)==0)
+if ($sth->rowCount()==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
 	}
 else
 	{
-	if (mysql_num_rows($res)>1)
+	if ($sth->rowCount()>1)
 		{
 		die("<p align='center' class='bk'>- Error in the database.</p>");
 		}

@@ -32,13 +32,13 @@ $sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 $sth->execute();
 $res=$sth->fetchAll();
 //$res=query($sql) or die("<p align='center' class='bk'>Database error.</p>");
-if (mysql_num_rows($res)==0)
+if ($sth->rowCount()==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
 	}
 else
 	{
-	if (mysql_num_rows($res)>1)
+	if ($sth->rowCount()>1)
 		{
 		die("<p align='center' class='bk'>- Error - on the database.</p>");
 		}
@@ -99,9 +99,9 @@ $res=$sth->fetchAll();
 <?php
 $sql="select `ID_req`, `ID_field`, `ad_text` from `farmers_stoch`.`ads` where id_user='$_SESSION[id_u]'";
 $sth=$dbh->prepare($sql);
-//$sth->execute();
-$res=$sth->query($sql);
-if (mysql_num_rows($res)==0)
+$sth->execute();
+//$res=$sth->query($sql);
+if ($sth->rowCount()==0)
 	{
 	die("You have no ad published.");
 	}

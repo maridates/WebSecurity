@@ -23,7 +23,7 @@ $interogare = "SELECT * FROM `farmers_stock`.`requests` order by `date` desc";
 $sth=$dbh->prepare($interogare);
 $sth->execute();
 //$rez = query ($interogare);
-$nrRez = mysql_num_rows( $rez );
+$nrRez = $sth->rowCount();
 if($nrRez == 0)
    echo "No request found!";
 else

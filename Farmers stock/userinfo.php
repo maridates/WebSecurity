@@ -33,13 +33,13 @@ $sth->bindParam(":username",$usr);
 $sth=$dbh->prepare($sql);
 $sth->execute();
 $res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
-if (mysql_num_rows($res)==0)
+if ($sth->rowCount()==0)
 	{
 	die();
 	}
 else
 	{
-	if (mysql_num_rows($res)>1)
+	if ($sth->rowCount()>1)
 		{
 		die ("<p align='center' class='bkl'>Database error.</p>");
 		}

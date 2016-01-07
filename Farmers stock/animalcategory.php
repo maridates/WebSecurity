@@ -42,16 +42,17 @@ else
 		$sql="select `field_name` from `farmers_stock`.`field` where id_field=:id_field";
 			$sth->bindParam(":id_field",$id_cat[$i]);
 			$sth=$dbh->prepare($sql);
-			$res=$sth->query($sql);
+			$sth->execute();//$res=$sth->query($sql);
 		//$res=query($sql) or die (errorInfo());
 		$dom=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
 		$sql="select `username`, `ad_text` from `farmers_stock`.`ads`, `farmers_stock`.`users` where id_field=:id_field and ID_user=id_user";
 			$sth->bindParam(":id_field",$id_cat[$i]);
 			$sth=$dbh->prepare($sql);
-			$res=$sth->query($sql);
+			$sth->execute();
+			//$res=$sth->query($sql);
 		//$res=query($sql) or die (errorInfo());
 		print "<tr><td colspan='2' align='center' class='bk'><b>domainl: $dom[0]</b></td></tr>";
-		if (mysql_num_rows($res)==0)
+		if ($sth->rowCount()==0)
 			{
 			print "<tr><td colspan='2' align='center' class='bk'>No ads!</td></tr>";
 			}

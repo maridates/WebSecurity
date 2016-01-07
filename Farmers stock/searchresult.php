@@ -18,19 +18,17 @@
 <H1 align="center"><font color="#FFFFFF" size="5" face="Comic Sans MS">Show result on search </font></H1>
 <HR>
 <?php
-$cautare = addslashes ( trim( $HTTP_POST_VARS["cautare"] ) );
+$cautare = addslashes ( trim( $POST["cautare"] ) );
 echo "We are looking for: ".$cautare."<BR>";
 include "connect_db.php";
 $interogare = "SELECT `id_field`, `ID_user`, `ad_text` FROM `farmers_stock`.`ads` ";
 if( $cautare!="") 
-     $interogare = $interogare."WHERE `anunt` LIKE '%".$cautare."%'";
+     $interogare = $interogare."WHERE `ad_text` LIKE '%".$cautare."%'";
 $sth=$dbh->prepare($sql);
 $sth->execute();
-$rez=$sth->query($interogare);
+//$rez=$sth->query($interogare);
 //$rez = query ($interogare);
-if (!$rez)
-     die("Search error!");
-$nrRez = mysql_num_rows( $rez );
+$nrRez = $sth->rowCount();
 if($nrRez == 0)
    echo "Nothing to show!";
 else
@@ -49,13 +47,13 @@ else
 		$sql="select `username` from `farmers_stock`.`users` where `ID_user`=".$row[1];
 		$sth=$dbh->prepare($sql);
 		$sth->execute();
-		$res=$sth->query($sql);
+		//$res=$sth->query($sql);
 		//$res=query($sql) or die (errorInfo());
 		$pers=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
 		$sql="select `field_name` from `farmers_stock`.`field` where `id_field`=".$row[0];
 		$sth=$dbh->prepare($sql);
 		$sth->execute();
-		$res=$sth->query($sql);
+		//$res=$sth->query($sql);
 		//$res=query($sql) or die (errorInfo());
 		$domain=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res) or die (errorInfo());
 		print "<tr>";

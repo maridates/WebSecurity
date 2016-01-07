@@ -152,7 +152,7 @@ if (!isset ($_POST['submit']))
 			echo "PDO error :" . $exception->getMessage();
 		}
 		//query($interogare) or die (errorInfo());
-		print '<p align="center" class="bk">The dates were inserted!';
+		print '<p align="center" class="bk">The data were inserted!';
 		print '<br /><a href="javascript:parent.close();">Close window -  go to your account</a></p>';
 	}
 	?>

@@ -39,13 +39,13 @@ if (!isset($_SESSION[adm]))
 		$sth->execute();
 		$res=$sth->fetchAll();
 		//$res=query($sql) or die (errorInfo());
-		if (mysql_num_rows($res)==0)
+		if ($sth->rowCount()==0)
 		{
 			die();
 		}
 		else
 		{
-			if (mysql_num_rows($res)>1)
+			if ($sth->rowCount()>1)
 			{
 				die();
 			}
@@ -112,13 +112,13 @@ $sth=$dbh->prepare($sql);
 $sth->execute();
 $res=$sth->query($sql);
 //$res=query($sql) or die (errorInfo());
-if (mysql_num_rows($res)==0)
+if ($sth->rowCount()==0)
 {
 	die();
 }
 else
 {
-	if (mysql_num_rows($res)>1)
+	if ($sth->rowCount()>1)
 	{
 		die();
 	}
@@ -186,7 +186,7 @@ default:
 			$sth->execute();
 			$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
 			print "<table class='bkl'>";
-			if (mysql_num_rows($res)==0)
+			if ($sth->rowCount()==0)
 				print "<tr><td class='bk' align='center'>No ads!</td></tr>";
 			else
 			{
@@ -218,7 +218,7 @@ default:
 		$sth->execute();
 		$res=$sth->query($sql);//$res=query($sql) or die(errorInfo());
 		print "<table class='bkl'>";
-		if (mysql_num_rows($res)==0)
+		if ($sth->rowCount()==0)
 		{
 			print "<tr><td class='bk' align='center'>There are no requests!</td></tr>";
 		}
@@ -269,7 +269,7 @@ default:
 		$sth->execute();
 		$res=$sth->query($sql);
 		//$res=query($sql) or die(errorInfo());
-		if (mysql_num_rows($res)==0)
+		if ($sth->rowCount()==0)
 		{
 			print "<tr><td class='bk' align='center'>There are no fields!</td></tr>";
 		}
@@ -307,7 +307,7 @@ default:
 		$sth->execute();
 		//$res=query($sql) or die(errorInfo());
 		print "<table class='bkl'>";
-		if (mysql_num_rows($res)==0)
+		if ($sth->rowCount()==0)
 		{
 			print "<tr><td class='bk' align='center'>No persons!</td></tr>";
 		}
