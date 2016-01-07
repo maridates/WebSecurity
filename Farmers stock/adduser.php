@@ -78,13 +78,15 @@ else
 		die();
 		}
 	include "connect_db.php";
-	$sql="select `username` from `farmers_stock`.`users` where `username`='$username'";
+	$sql="select `username` from `farmers_stock`.`users` where `username`=:username";
 		$sth=$dbh->prepare($sql);
-		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+		$sth->bindParam(":username", $username);
 		$sth->execute();
-		$res=$sth->fetchAll();
-	//$res=query($sql) or die (errorInfo());
-	if (mysql_num_rows($res)!==0)
+		//$res=$sth->fetchAll();
+		//$res = $sth->fetchAll(PDO::FETCH_ASSOC);
+		$sth->fetchAll(PDO::FETCH_ASSOC);
+	//$res=query($sql) or die (errorInfo()); $stmt->rowCount()
+	if ($sth->rowCount()!==0)
 		{
 		print "<p align='center' class='bk'>Username already registered !<br />- ERROR -</p>";
 		print "<meta http-equiv='refresh' content='2;url=adduser.php'>";
@@ -134,15 +136,21 @@ else
 		}
 	$Password=hash("sha256",$Password);
 	$interogare="INSERT INTO farmers_stock.users (username, password, last_name, first_name, address, phone) VALUES (:username, :Password, :Surname, :Firstname, :Address, :phone)";
-		$sth=$dbh->prepare($interogare);
-		$sth->bindParam(":username",$username);
-		$sth->bindParam(":Password",$Password);
-		$sth->bindParam(":Surname",$Surname);
-		$sth->bindParam(":Firstname",$Firstname);
-		$sth->bindParam(":Address",$Address);
-		$sth->bindParam(":phone",$phone);
+	try {
+		$sth = $dbh->prepare($interogare);
+		$sth->bindParam(":username", $username);
+		$sth->bindParam(":Password", $Password);
+		$sth->bindParam(":Surname", $Surname);
+		$sth->bindParam(":Firstname", $Firstname);
+		$sth->bindParam(":Address", $Address);
+		$sth->bindParam(":phone", $phone);
 		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 		$sth->execute();
+	}
+	catch ( PDOException $exception )
+	{
+		echo "PDO error :" . $exception->getMessage();
+	}
 		//query($interogare) or die (errorInfo());
     print '<p align="center" class="bk">The dates were inserted!';
 	print '<br /><a href="javascript:parent.close();">Close window -  go to your account</a></p>';

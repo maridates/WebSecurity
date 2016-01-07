@@ -20,16 +20,16 @@ print "<p><a href='farmers_stock.php'>Home</a> <a href='buyers.php'  >Buyers  </
 include "connect_db.php";
 $sql="select `id_field` from `field` where `field_type`='1'";
 $sth=$dbh->prepare($sql);
-//$sth->execute();
-$res=$sth->query($sql);
+$sth->execute();
+//$res=$sth->query($sql);
 //$res=query($sql) or die (errorInfo());
-if (mysql_num_rows($res)==0)
+if ($sth->rowCount()==0)
 	{
 	print "There are no domains with animal products";
 	}
 else
 	{
-	$j=mysql_num_rows($res);
+	$j=$sth->rowCount();
 	for ($i=0;$i<$j;$i++)
 		{
 		$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
