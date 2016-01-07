@@ -21,13 +21,13 @@ $sql="select `id_field` from `farmers_stock`.`field` where `field_type`='2'";
 $sth=$dbh->prepare($sql);
 $res=$sth->query($sql);
 //$res=query($sql) or die (errorInfo());
-if (mysql_num_rows($res)==0)
+if ($sth->rowCount()==0)
 	{
 	print "There are no domains with plant products";
 	}
 else
 	{
-	$j=mysql_num_rows($res);
+	$j=$sth->rowCount();
 	for ($i=0;$i<$j;$i++)
 		{
 		$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
@@ -46,7 +46,7 @@ else
 			$sth=$dbh->prepare($sql);
 			$res=$sth->query($sql);//		$res=query($sql) or die (errorInfo());
 		print "<tr><td colspan='2' align='center' class='bk'><b>domainl: $dom[0]</b></td></tr>";
-		if (mysql_num_rows($res)==0)
+		if ($sth->rowCount()==0)
 			{
 			print "<tr><td colspan='2' align='center' class='bk'>There are no ads!</td></tr>";
 			}

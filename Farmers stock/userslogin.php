@@ -50,7 +50,7 @@ if (!trim($Password))
 	$sth->execute();
 	$result=$sth->fetchAll();
 	//$result = query ("select `ID_user`, `username`, `Password` from `farmers_stock`.`users` where `username`='$User';") or die (errorInfo());
-	if(mysql_num_rows($result)==0)
+	if($sth->rowCount()==0)
 		{
 		print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error -</p>");
 		print "<meta http-equiv='refresh' content='2;url=sellers.php'>";
@@ -58,7 +58,7 @@ if (!trim($Password))
 		}
 	else
 		{
-		if (mysql_num_rows($result)>1)
+		if ($sth->rowCount()>1)
 			{
 			print ("<p align='center' class='bk'>Database error!<br />- Error -</p>");
 			print "<meta http-equiv='refresh' content='2;url=sellers.php'>";
