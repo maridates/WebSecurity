@@ -8,35 +8,30 @@
     -o-background-size: cover;
     background-size: cover;
   }
-  p.one {
-
-    margin-top: 20%;
-    margin-bottom: 20%;
-    margin-right: 80px;
-    margin-left: 80px;
+  table.top {
+      margin-top: 18%;
   }
+  p.one {
+    margin-right: 50px;
+    margin-left: 50px;
+  }
+  img{
+      height: 15vw;
+      width: 15vw;
+  }
+
 </style>
 <body background="pictures/background.jpg" >
 <div align="center">
   <h1>Farmers Stock</h1>
-  <h2>Here you can buy local farmers stock</h2>
-  <table border="0">
-    <tr>
+    <h2>Here you can buy local farmers stock</h2>
 
-      <td height="21">&nbsp;</td>
-      <td>&nbsp;</td>
+  <table border="0" class="top">
+    <tr>
+        <td width="50%"><div align="center"><a href="buyers.php"><p class = one><img src="pictures/1.png"></p></a></div></td>
+        <td width="50%"><div align="center"><a href="sellers.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
     </tr>
-    <tr>
-      <td width="50%"><div align="center"><p class = one><a href="buyers.php"><img src="pictures/1.png"></a></p></div></td>
-      <td width="50%">
-
-        <div align="center">
-
-          <p class = one>
-            <a href="sellers.php"><img src="pictures/2.png" ></a></p>
-        </div></td>
-    </tr>
-    <tr>
+      <tr>
       <td>&nbsp;</td>
     </tr>
   </table>
