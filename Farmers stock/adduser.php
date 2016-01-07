@@ -134,8 +134,9 @@ if (!isset ($_POST['submit']))
 			print "<meta http-equiv='refresh' content='2;url=adduser.php'>";
 			die();
 		}
-		$Password=hash("sha256",$Password);
-		$interogare="INSERT INTO farmers_stock.users (username, password, last_name, first_name, address, phone) VALUES (:username, :Password, :Surname, :Firstname, :Address, :phone)";
+		$salt=rand(1000,9999);
+		$Password=hash("sha256",$salt.$Password);
+		$interogare="INSERT INTO farmers_stock.users (username, password, last_name, first_name, address, phone, salt) VALUES (:username, :Password, :Surname, :Firstname, :Address, :phone, :salt)";
 		try {
 			$sth = $dbh->prepare($interogare);
 			$sth->bindParam(":username", $username);
@@ -144,6 +145,7 @@ if (!isset ($_POST['submit']))
 			$sth->bindParam(":Firstname", $Firstname);
 			$sth->bindParam(":Address", $Address);
 			$sth->bindParam(":phone", $phone);
+			$sth->bindParam(":salt", $salt);
 			//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 			$sth->execute();
 		}

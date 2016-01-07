@@ -42,17 +42,17 @@ if (!trim($Password))
 	die();	
 	}
 	include "connect_db.php";
-	$Password=hash("sha256",$Password);
-	$sql="select `ID_user`, `username`, `Password` from `farmers_stock`.`users` where `username`=:username";
-	$sth->bindParam(":username",$User);
+	$sql="select `ID_user`, `username`, `Password`, `salt` from `farmers_stock`.`users` where `username`=:username";
 	$sth=$dbh->prepare($sql);
+	$sth->bindParam(":username",$User);
 	//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 	$sth->execute();
-	$result=$sth->fetchAll();
+	//$result=$sth->fetchAll();
 	//$result = query ("select `ID_user`, `username`, `Password` from `farmers_stock`.`users` where `username`='$User';") or die (errorInfo());
 	if($sth->rowCount()==0)
 		{
-		print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error -</p>");
+		print $sth->queryString;
+		print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error 1 -</p>");
 		print "<meta http-equiv='refresh' content='2;url=sellers.php'>";
 		die();
 		}
@@ -60,20 +60,24 @@ if (!trim($Password))
 		{
 		if ($sth->rowCount()>1)
 			{
-			print ("<p align='center' class='bk'>Database error!<br />- Error -</p>");
+			print ("<p align='center' class='bk'>Database error!<br />- Error 2 -</p>");
 			print "<meta http-equiv='refresh' content='2;url=sellers.php'>";
 			die();
 			}
 			$row = $sth->fetch(PDO::FETCH_ASSOC);//$row=mysql_fetch_row($result);
-		if ($Password!=$row[2])
+
+		$salt=$row['salt'];
+		$Password=hash("sha256",$salt.$Password);
+
+		if ($Password!=$row['Password'])
 			{
-			$_SESSION['count']++;
-			print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error -</p>");
+			//$_SESSION['count']++;
+			print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error 3 -</p>");
 			print "<meta http-equiv='refresh' content='2;url=sellers.php'>";
 			die();
 			}
 		//$_SESSION['id_u']=$row[0];
 		//$_SESSION['user']=$row[1];
-		print "<meta http-equiv='refresh' content='0;url=add.php'>";
+		//print "<meta http-equiv='refresh' content='0;url=add.php'>";
 		}
 ?>
