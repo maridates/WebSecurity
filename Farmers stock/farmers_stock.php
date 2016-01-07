@@ -9,8 +9,9 @@
     background-size: cover;
   }
   p.one {
-    margin-top: 300px;
-    margin-bottom: 50px;
+
+    margin-top: 20%;
+    margin-bottom: 20%;
     margin-right: 80px;
     margin-left: 80px;
   }
