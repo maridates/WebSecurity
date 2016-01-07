@@ -87,7 +87,7 @@ else
 	if (mysql_num_rows($res)!==0)
 		{
 		print "<p align='center' class='bk'>Username already registered !<br />- ERROR -</p>";
-		print "<meta http-equiv='refresh' content='2;url=adduser.php'>";
+		//print "<meta http-equiv='refresh' content='2;url=adduser.php'>";
 		die();
 		}
 	if (!trim($Password))
@@ -132,8 +132,9 @@ else
 		print "<meta http-equiv='refresh' content='2;url=adduser.php'>";
 		die();
 		}
-	$Password=hash("sha256",$Password);
-	$interogare="INSERT INTO farmers_stock.users (username, password, last_name, first_name, address, phone) VALUES (:username, :Password, :Surname, :Firstname, :Address, :phone)";
+	$salt=rand(1000, 9999);
+	$Password=hash("sha256",$rand.$Password);
+	$interogare="INSERT INTO farmers_stock.users (username, password, last_name, first_name, address, phone, salt) VALUES (:username, :Password, :Surname, :Firstname, :Address, :phone, :salt)";
 		$sth=$dbh->prepare($interogare);
 		$sth->bindParam(":username",$username);
 		$sth->bindParam(":Password",$Password);
@@ -141,6 +142,7 @@ else
 		$sth->bindParam(":Firstname",$Firstname);
 		$sth->bindParam(":Address",$Address);
 		$sth->bindParam(":phone",$phone);
+		$sth->bindParam(":salt",$salt);
 		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 		$sth->execute();
 		//query($interogare) or die (errorInfo());
