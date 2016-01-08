@@ -1,5 +1,6 @@
 <?
-session_start();
+//session_start();
+sec_session_start();
 ?>
 <html>
 <head>
@@ -78,6 +79,6 @@ if (!trim($Password))
 			}
 		//$_SESSION['id_u']=$row[0];
 		//$_SESSION['user']=$row[1];
-		//print "<meta http-equiv='refresh' content='0;url=add.php'>";
+		print "<meta http-equiv='refresh' content='0;url=add.php'>";
 		}
 ?>
