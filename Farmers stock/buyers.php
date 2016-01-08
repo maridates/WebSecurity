@@ -1,16 +1,34 @@
-<body background="pictures/KwallBlend1280A.jpg">
-<p><a href="farmers_stock.php"> </a><a href="farmers_stock.php"><img src="pictures/back.PNG" width="51" height="47" border="0"></a></p>
-<table width="77%" border="0" align="center">
-  <tr> 
-    <td height="460"><div align="center"> 
-        <p>&nbsp;</p>
-        <p><a href="animalcategory.php"><img src="pictures/animals.jpg" width="373" height="525" border="0"></a></p>
-      </div></td>
-    <td><div align="center"> 
-        <p>&nbsp;</p>
-        <p><a href="nonanimalcategory.php"><img src="pictures/plants2.jpg" width="385" height="528" border="0"></a></p>
-      </div></td>
-  </tr>
+<style>
+    body {
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    table.top {
+        margin-top: 18%;
+    }
+    p.one {
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+    img{
+        height: 15vw;
+        width: 15vw;
+    }
+</style>
+<body background="pictures/background.jpg">
+<div align="center">
+
+<h1>Buy your products here</h1>
+<table class="top" border="0" align="center">
+    <tr>
+        <td width="50%"><div align="center"><a href="animalcategory.php"><p class = one><img src="pictures/meat.png"></p></a></div></td>
+        <td width="50%"><div align="center"><a href="nonanimalcategory.php"><p class = one><img src="pictures/plants.png" ></p></a></div></td>
+    </tr>
   <tr> 
     <td height="113" colspan="2"><div align="center"> 
         <form name="cauta" method="post" action="searchresult.php">
@@ -24,3 +42,5 @@
       </div></td>
   </tr>
 </table>
+</div>
+

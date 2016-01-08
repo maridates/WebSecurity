@@ -10,24 +10,36 @@
 		{
 			background-color: #AFAFAF;
 		}
+		body {
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+        table.top {
+            margin-top: 18%;
+        }
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
-<body background="pictures/boiler_of_soul_by_Feni_x.jpg" tracingsrc="pictures/boiler_of_soul_by_Feni_x.jpg" tracingopacity="80">
+<body background="pictures/background.jpg">
 <?php
 if (!isset ($_POST['submit']))
 {
 ?>
 <form action="adduser.php" method="post">
-	<table align="center" class="bk">
+	<table align="center" class="top">
 		<tr>
-			<TD colspan="2" align="center" class="bkl"><a href="javascript:parent.close();">Close</a></TD>
-		</TR>
+			<td colspan="2" align="center" class="bkl"><a href="javascript:parent.close();">Close</a></td>
+		</tr>
 		<tr>
 			<td colspan="2" align="center" class="bkl"><b>Register</b></td>
 		</tr>
-		<TR>
-			<TD align="right" class="bkl"><FONT face="verdana" size=2><b>Username:</b></FONT></TD>
-			<TD class="bkl">&nbsp;<input type="text" name="username" size="30"></TD>
+		<tr>
+			<td align="right" class="bkl"><FONT face="verdana" size=2><b>Username:</b></FONT></td>
+			<td class="bkl">&nbsp;<input type="text" name="username" size="30"></td>
 		</tr>
 		<tr>
 			<TD align="right" class="bkl"><FONT face="verdana" size=2><b>Password User:</b></FONT></TD>
@@ -158,9 +170,9 @@ if (!isset ($_POST['submit']))
 		print '<br /><a href="javascript:parent.close();">Close window -  go to your account</a></p>';
 	}
 	?>
-	<p><font color="#0066CC" face="Comic Sans MS">Register Instructions </font></p>
-	<p><font color="#0066CC" face="Comic Sans MS">In order to insert an ad you have to be registered</font></p>
-	<p><font color="#0066CC" face="Comic Sans MS">Your username /
+	<p align="center"><font face="Comic Sans MS">Register Instructions </font></p>
+	<p align="center"><font face="Comic Sans MS">In order to insert an ad you have to be registered</font></p>
+	<p align="center"><font face="Comic Sans MS">Your username /
 			Password will remain strictly confidential</font></p>
 </body>
 </html>
