@@ -77,8 +77,10 @@ if (!trim($Password))
 			print "<meta http-equiv='refresh' content='2;url=sellers.php'>";
 			die();
 			}
-		//$_SESSION['id_u']=$row[0];
-		//$_SESSION['user']=$row[1];
+		$_SESSION['id_u']=$row['ID_user'];
+		$_SESSION['user']=$row['username'];
+		//print_r($_SESSION);
 		print "<meta http-equiv='refresh' content='0;url=add.php'>";
+
 		}
 ?>

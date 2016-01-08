@@ -9,7 +9,7 @@ mysql_select_db($dbas) or die (errorInfo());*/
 //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 /* Connect to an ODBC database using driver invocation */
-$dsn = 'mysql:dbname=farmers_stock;host=localhost:8889';
+$dsn = 'mysql:dbname=farmers_stock;host=localhost';
 $user = 'root';
 $password = '';
 

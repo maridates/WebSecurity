@@ -1,5 +1,6 @@
 <?php
-session_start();
+include_once 'functions.php';
+sec_session_start();
 ?>
 <html>
 <head>
@@ -17,9 +18,10 @@ session_start();
 </head>
 <body>
 <?php
+var_dump($_SESSION);
 if (!isset($_SESSION['id_u']))
 	{
-	die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
+	//die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
 	}
 if (!isset($_SESSION['user']))
 	{
@@ -28,7 +30,7 @@ if (!isset($_SESSION['user']))
 include "connect_db.php";
 $sql="select `ID_user` from `farmers_stock`.`users` where `username`=:username;";
 $sth=$dbh->prepare($sql);
-$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+$sth->bindParam(":username", $_SESSION["user"],PDO::PARAM_STR);
 $sth->execute();
 $res=$sth->fetchAll();
 //$res=query($sql) or die("<p align='center' class='bk'>Database error.</p>");
