@@ -1,6 +1,25 @@
-<body background="pictures/wall2.png">
+<style>
+    body {
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    table.top {
+        margin-top: 5%;
+    }
+    img{
+        height: 5vw;
+        width: 5vw;
+    }
+
+</style>
+<body background="pictures/background.jpg">
 <p><a href="farmers_stock.php"> </a><a href="farmers_stock.php"><img src="pictures/back.PNG" width="53" height="55" border="0"></a></p>
-<table width="71%" border="0" align="center">
+<table  class="top" width="71%" border="0" align="center">
   <tr> 
     <td width="73%">
 <p align="center"><font color="#FFFFFF" size="4" face="Comic Sans MS"><strong>Online Suport</strong></font></p>

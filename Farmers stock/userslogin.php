@@ -17,19 +17,8 @@ sec_session_start();
 </style>
 </head>
 <?php
-//if (strlen($_SESSION['count'])==0)
-//	{
-//	$_SESSION['count']=0;
-//	}
-//else
-//	{
-//	if ($_SESSION['count']>2)
-//		{
-//		die ("<p align='center' class='bk'>- ERROR - on connecting to database.</p>");
-//		}
-//	}
-$User=$_POST['User'];
-$Password=$_POST['Password'];
+$User = filter_input(INPUT_POST, 'User', FILTER_SANITIZE_STRING);
+$Password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);//$_POST['Password'];
 if (!trim($User))
 	{
 	print ("<p align='center' class='bk'>You have to insert the username!<br />- Error -</p>");
@@ -48,8 +37,6 @@ if (!trim($Password))
 	$sth->bindParam(":username",$User);
 	//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 	$sth->execute();
-	//$result=$sth->fetchAll();
-	//$result = query ("select `ID_user`, `username`, `Password` from `farmers_stock`.`users` where `username`='$User';") or die (errorInfo());
 	if($sth->rowCount()==0)
 		{
 		print $sth->queryString;
@@ -78,9 +65,11 @@ if (!trim($Password))
 			die();
 			}
 		$_SESSION['id_u']=$row['ID_user'];
-		$_SESSION['user']=$row['username'];
+		$_SESSION['User']=$row['username'];
+			$login_session=$_SESSION['User'];
 		//print_r($_SESSION);
-		print "<meta http-equiv='refresh' content='0;url=add.php'>";
+		//print "<meta http-equiv='refresh' content='0;url=add.php'>";
+			print "<meta http-equiv='refresh' content='0;url=showuserinfo.php?user=$login_session'>";
 
 		}
 ?>
