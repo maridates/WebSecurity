@@ -1,3 +1,8 @@
+<?php
+include_once 'functions.php';
+sec_session_start();
+$_SESSION['field_search']= $_POST['field_search'];
+?>
 <style>
     body {
         background-repeat: no-repeat;
@@ -27,15 +32,15 @@
 <table class="top" border="0" align="center">
     <tr>
         <td width="50%"><div align="center"><a href="animalcategory.php"><p class = one><img src="pictures/meat.png"></p></a></div></td>
-        <td width="50%"><div align="center"><a href="nonanimalcategory.php"><p class = one><img src="pictures/plants.png" ></p></a></div></td>
+        <td width="50%"><div align="center"><a href="nonanimalcategory.php"><p class = one><img src="pictures/plants.p" ></p></a></div></td>
     </tr>
   <tr> 
     <td height="113" colspan="2"><div align="center"> 
-        <form name="cauta" method="post" action="searchresult.php">
+        <form name="search" method="post" action="searchresult.php">
           <p align="center"><font size="5">Search products (If it is empty 
             all the ads will be shown!)</font><br>
-            <input type="text" name="cautare" size="81" maxlength="50">
-          <p> 
+            <input type="text" name="field_search" size="81" maxlength="50">
+          </p>
             <input type="submit" name="trimit" value="Submit">
             <input type="reset" name="sterg" value="Reset">
         </form>

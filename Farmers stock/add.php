@@ -18,7 +18,7 @@ sec_session_start();
 </head>
 <body>
 <?php
-var_dump($_SESSION);
+//var_dump($_SESSION);
 if (!isset($_SESSION['id_u']))
 	{
 	//die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
@@ -54,7 +54,7 @@ if (isset($_POST['logout']))
 	{
 	unset ($_SESSION['id_u']);
 	unset ($_SESSION['user']);
-	unset ($_SESSION['count']);
+	//unset ($_SESSION['count']);
 	print "<meta http-equiv='refresh' content='0;url=farmers_stock.php'>";
 	}
 if (isset($_POST['submit']))
@@ -67,7 +67,7 @@ if (isset($_POST['submit']))
 	print "<meta http-equiv='refresh' content='0;url=add.php'>";
 	}
 ?>
-<center><form action="add.php" method="post"><input type="submit" name="logout" value="Logout">  ( iesire username ) </form></center>
+<center><form action="add.php" method="post"><input type="submit" name="logout" value="Logout">  </form></center>
 <p class="bkl" align="center">Add your announcement</p>
 <hr align="center" color="#000000" width="100%">
 <form name=adaug action="addeffect.php" method='post'>

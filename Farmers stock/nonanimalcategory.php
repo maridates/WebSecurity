@@ -19,7 +19,7 @@ print "<p><a href='farmers_stock.php'>Home</a> <a href='buyers.php'>Buyers</a></
 include "connect_db.php";
 $sql="select `id_field` from `farmers_stock`.`field` where `field_type`='2'";
 $sth=$dbh->prepare($sql);
-$res=$sth->query($sql);
+$sth->execute();
 //$res=query($sql) or die (errorInfo());
 if ($sth->rowCount()==0)
 	{
