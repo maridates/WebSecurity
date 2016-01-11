@@ -1,7 +1,4 @@
-<?
-//session_start();
-sec_session_start();
-?>
+
 <html>
 <head>
 <title>Login</title>
@@ -17,6 +14,9 @@ sec_session_start();
 </style>
 </head>
 <?php
+include_once ('functions.php');
+sec_session_start();
+
 $User = filter_input(INPUT_POST, 'User', FILTER_SANITIZE_STRING);
 $Password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);//$_POST['Password'];
 if (!trim($User))
@@ -68,8 +68,8 @@ if (!trim($Password))
 		$_SESSION['User']=$row['username'];
 			$login_session=$_SESSION['User'];
 		//print_r($_SESSION);
-		//print "<meta http-equiv='refresh' content='0;url=add.php'>";
-			print "<meta http-equiv='refresh' content='0;url=showuserinfo.php?user=$login_session'>";
+		print "<meta http-equiv='refresh' content='0;url=add.php'>";
+			//print "<meta http-equiv='refresh' content='0;url=showuserinfo.php?user=$login_session'>";
 
 		}
 ?>

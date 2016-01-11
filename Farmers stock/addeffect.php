@@ -4,7 +4,7 @@ if (!isset($_SESSION['id_u']))
 	{
 	die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
 	}
-if (!isset($_SESSION['user']))
+if (!isset($_SESSION['User']))
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (2).</p>");
 	}
@@ -27,7 +27,7 @@ if (!isset($_SESSION['user']))
 include "connect_db.php";
 $sql="select `ID_user` from `users` where username=:sess";
 $sth=$dbh->prepare($sql);
-$sth->bindParam(":sess",$_SESSION['user']);
+$sth->bindParam(":sess",$_SESSION['User']);
 $sth->execute();
 $res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if ($sth->rowCount()==0)

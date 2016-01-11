@@ -31,7 +31,7 @@ include "connect_db.php";
 $interogare = "SELECT `id_field`, `ID_user`, `ad_text` FROM `ads` ";
 if( $field_search!="") 
      $interogare = $interogare."WHERE `ad_text` LIKE '%".$field_search."%'";
-$sth=$dbh->prepare($sql);
+$sth=$dbh->prepare($interogare);
 $sth->execute();
 //$rez=$sth->query($interogare);
 //$rez = query ($interogare);

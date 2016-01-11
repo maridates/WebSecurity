@@ -1,7 +1,4 @@
-<?php
-include_once 'functions.php';
-sec_session_start();
-?>
+
 <html>
 <head>
 <title>Add announcement</title>
@@ -18,21 +15,24 @@ sec_session_start();
 </head>
 <body>
 <?php
-//var_dump($_SESSION);
+include_once 'functions.php';
+sec_session_start();
+
+var_dump($_SESSION);
 if (!isset($_SESSION['id_u']))
 	{
-	//die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
+	die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
 	}
-if (!isset($_SESSION['user']))
+if (!isset($_SESSION['User']))
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (2).</p>");
 	}
 include "connect_db.php";
 $sql="select `ID_user` from `farmers_stock`.`users` where `username`=:username;";
 $sth=$dbh->prepare($sql);
-$sth->bindParam(":username", $_SESSION["user"],PDO::PARAM_STR);
+$sth->bindParam(":username", $_SESSION["User"],PDO::PARAM_STR);
 $sth->execute();
-$res=$sth->fetchAll();
+//$res=$sth->fetchAll();
 //$res=query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if ($sth->rowCount()==0)
 	{
@@ -44,8 +44,10 @@ else
 		{
 		die("<p align='center' class='bk'>- Error - on the database.</p>");
 		}
-		$row = $sth->fetch(PDO::FETCH_ASSOC);//$row=mysql_fetch_row($res);
-	if ($row[0]!=$_SESSION['id_u'])
+		$row = $sth->fetchAll();//$row=mysql_fetch_row($res);
+		echo "<br>";
+print_r ($row);
+	if ($row[0]['ID_user']!=$_SESSION['id_u'])
 		{
 		die("<p align='center' class='bk'>- ERROR - on connecting to database. (4)</p>");
 		}
@@ -89,7 +91,7 @@ $res=$sth->fetchAll();
 ?>
 	</select>
     <TR>
-		<TD> Ad text: 
+		<TD> Description of your ad:
 		<TD><textarea name='anunt' cols="100" rows="10"></textarea></td>
 	</tr>
 	<tr>
@@ -114,9 +116,9 @@ else
 while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 	{
 	print "<hr>";
-	$sql="select `field_name` from `farmers_stoch`.`field` where `ID_field`='$row[1]'";
+	$sql="select `field_name` from `farmers_stoch`.`field` where `ID_field`=:id_field";
 		$sth=$dbh->prepare($sql);
-		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
+		$sth->bindParam(":id_field", $row['ID_field']);
 		$sth->execute();
 		//$res=$sth->fetchAll();
 	$roq=$sth->fetch(PDO::FETCH_ASSOC);

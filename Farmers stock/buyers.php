@@ -1,7 +1,7 @@
 <?php
 include_once 'functions.php';
 sec_session_start();
-$_SESSION['field_search']= $_POST['field_search'];
+//$_SESSION['field_search']= $_POST['field_search'];
 ?>
 <style>
     body {
@@ -32,7 +32,7 @@ $_SESSION['field_search']= $_POST['field_search'];
 <table class="top" border="0" align="center">
     <tr>
         <td width="50%"><div align="center"><a href="animalcategory.php"><p class = one><img src="pictures/meat.png"></p></a></div></td>
-        <td width="50%"><div align="center"><a href="nonanimalcategory.php"><p class = one><img src="pictures/plants.p" ></p></a></div></td>
+        <td width="50%"><div align="center"><a href="nonanimalcategory.php"><p class = one><img src="pictures/plants.png" ></p></a></div></td>
     </tr>
   <tr> 
     <td height="113" colspan="2"><div align="center"> 
