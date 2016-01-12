@@ -1,14 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['id_u']))
-	{
-	die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
-	}
-if (!isset($_SESSION['User']))
-	{
-	die("<p align='center' class='bk'>- ERROR - on connecting to database (2).</p>");
-	}
-?>
 <html>
 <head>
 <title>Add your announcement</title>
@@ -24,12 +13,22 @@ if (!isset($_SESSION['User']))
 </style>
 </head>
 <?php
+include_once 'functions.php';
+sec_session_start();
+if (!isset($_SESSION['id_u']))
+{
+	die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
+}
+if (!isset($_SESSION['User']))
+{
+	die("<p align='center' class='bk'>- ERROR - on connecting to database (2).</p>");
+}
 include "connect_db.php";
 $sql="select `ID_user` from `users` where username=:sess";
 $sth=$dbh->prepare($sql);
 $sth->bindParam(":sess",$_SESSION['User']);
 $sth->execute();
-$res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
+//$res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if ($sth->rowCount()==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
@@ -40,13 +39,14 @@ else
 		{
 		die("<p align='center' class='bk'>- Error in the database.</p>");
 		}
-	$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
-	if ($row[0]!=$_SESSION['id_u'])
+	$row=$sth->fetchALL(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
+		print_r($row);
+	if ($row[0]['ID_user']!=$_SESSION['id_u'])
 		{
 		die("<p align='center' class='bk'>- ERROR - on connecting to database. (4)</p>");
 		}
 	}
-$id_domain=$_POST['id_domain'];
+$id_domain=$_POST['ID_field'];
 $anunt=$_POST['anunt'];
 if (!trim($id_domain))
 	{

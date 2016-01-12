@@ -33,13 +33,14 @@ else
 	for ($i=0;$i<$j;$i++)
 		{
 		$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
-		$id_cat[$i]=$row[0];
+			print_r($row);
+		$id_cat[$i]=$row['id_field'];
 		}
 	print "<table class='bkl'>";
 	print "<tr><td align='right' class='bk'><b>User:</b></td><td class='bk'><b>Ad:</b></td></tr>";
 	for ($i=0;$i<$j;$i++)
 		{
-		$sql="select `field_name` from `farmers_stock`.`field` where id_field=:id_field";
+		$sql="select `field_name` from `field` where id_field=:id_field";
 			$sth->bindParam(":id_field",$id_cat[$i]);
 			$sth=$dbh->prepare($sql);
 			$sth->execute();//$res=$sth->query($sql);

@@ -62,9 +62,10 @@ if (isset($_POST['logout']))
 if (isset($_POST['submit']))
 	{
 	$ID_req=$_GET['id'];
-	$sql="delete from `farmers_stoch`.`ads` where `ID_req`='$ID_req'";
+	$sql="delete from `ads` where `ID_req`=::ID_req";
 	//query("delete from `farmers_stoch`.`ads` where `ID_req`='$ID_req'") or die (errorInfo());
 		$sth=$dbh->prepare($sql);
+		$sth->bindParam(":ID_req", $ID_req,PDO::PARAM_INT);
 		$sth->execute();
 	print "<meta http-equiv='refresh' content='0;url=add.php'>";
 	}
@@ -75,19 +76,18 @@ if (isset($_POST['submit']))
 <form name=adaug action="addeffect.php" method='post'>
   <table>
     <TD align="right">Field:</TD>
-	<TD><select name='ID_field'>
+	<TD><select name="ID_field">
 <?php
-$sql="select * from farmers_stoch.field";
+$sql="select * from field";
 $sth=$dbh->prepare($sql);
-//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 $sth->execute();
-$res=$sth->fetchAll();
-
-	//$res=query($sql) or die(errorInfo());
-	while($row = $sth->fetch(PDO::FETCH_ASSOC))
-		{
-		print "<option value='$row[0]'>$row[1]</option>";
-		}
+$row = $sth->fetchALL();
+$data=$row;
+foreach($data as $row) {
+	$id = $row['ID_field'];
+	$content = $row['field_name'];
+	print "<option value='".$id."'>".$content."</option>";
+}
 ?>
 	</select>
     <TR>
@@ -101,8 +101,9 @@ $res=$sth->fetchAll();
 </form>
 <hr>
 <?php
-$sql="select `ID_req`, `ID_field`, `ad_text` from `farmers_stoch`.`ads` where id_user='$_SESSION[id_u]'";
+$sql="select `ID_req`, `ID_field`, `ad_text` from `farmers_stoch`.`ads` where id_user=:ID_user";
 $sth=$dbh->prepare($sql);
+$sth->bindParam(":ID_user", $_SESSION['id_u'],PDO::PARAM_INT);
 $sth->execute();
 //$res=$sth->query($sql);
 if ($sth->rowCount()==0)
@@ -116,7 +117,7 @@ else
 while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 	{
 	print "<hr>";
-	$sql="select `field_name` from `farmers_stoch`.`field` where `ID_field`=:id_field";
+	$sql="select field_name from field where ID_field=:id_field";
 		$sth=$dbh->prepare($sql);
 		$sth->bindParam(":id_field", $row['ID_field']);
 		$sth->execute();
