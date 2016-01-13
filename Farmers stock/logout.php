@@ -20,6 +20,7 @@ setcookie(session_name(), '', time()-42000,
     $params["httponly"]);
 
 //Destroy session
+session_unset();
 session_destroy();
 header('Location: ../Farmers%20stock/farmers_stock.php');
 ?>

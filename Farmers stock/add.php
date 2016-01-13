@@ -1,4 +1,6 @@
-
+<?php
+include "header.php";
+?>
 <html>
 <head>
 <title>Add announcement</title>
@@ -21,11 +23,11 @@ sec_session_start();
 var_dump($_SESSION);
 if (!isset($_SESSION['id_u']))
 	{
-	die ("<p align='center' class='bk'>- ERROR - on connecting to database (1).</p>");
+	die ("<p align='center' class='bk'>- Please login (1).</p>");
 	}
 if (!isset($_SESSION['User']))
 	{
-	die("<p align='center' class='bk'>- ERROR - on connecting to database (2).</p>");
+	die("<p align='center' class='bk'>- Please login (2).</p>");
 	}
 include "connect_db.php";
 $sql="select `ID_user` from `farmers_stock`.`users` where `username`=:username;";
@@ -70,7 +72,6 @@ if (isset($_POST['submit']))
 	print "<meta http-equiv='refresh' content='0;url=add.php'>";
 	}
 ?>
-<center><form action="add.php" method="post"><input type="submit" name="logout" value="Logout">  </form></center>
 <p class="bkl" align="center">Add your announcement</p>
 <hr align="center" color="#000000" width="100%">
 <form name=adaug action="addeffect.php" method='post'>

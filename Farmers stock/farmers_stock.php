@@ -1,3 +1,6 @@
+<?php
+include "header.php";
+?>
 <style>
   body {
     background-repeat: no-repeat;
@@ -29,7 +32,7 @@
   <table border="0" class="top">
     <tr>
         <td width="50%"><div align="center"><a href="buyers.php"><p class = one><img src="pictures/1.png"></p></a></div></td>
-        <td width="50%"><div align="center"><a href="sellers.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
+        <td width="50%"><div align="center"><a href="add.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
     </tr>
       <tr>
       <td>&nbsp;</td>
