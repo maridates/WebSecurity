@@ -31,7 +31,7 @@ else
 	for ($i=0;$i<$j;$i++)
 		{
 		$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
-		$id_cat[$i]=$row[0];
+		$id_cat[$i]=$row['id_field'];
 		}
 	print "<table class='bkl'>";
 	print "<tr><td align='right' class='bk'><b>User:</b></td><td class='bk'><b>Ad:</b></td></tr>";
@@ -40,21 +40,28 @@ else
 		$sql="select `field_name` from `farmers_stock`.`field` where id_field=:id_field";
 			$sth=$dbh->prepare($sql);
 			$sth->bindParam(":id_field",$id_cat[$i]);
-			$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
+			$sth->execute();
+			//$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
 		$dom=$sth->fetch(PDO::FETCH_ASSOC);//=mysql_fetch_row($res);
-		$sql="select `username`, `ad_text` from `farmers_stock`.`ads`, `farmers_stock`.`users` where id_field=$id_cat[$i] and ID_user=id_user";
+		$sql="select `ad_text`, `id_user` from `ads` where id_field=:id_field";
 			$sth=$dbh->prepare($sql);
-			$res=$sth->query($sql);//		$res=query($sql) or die (errorInfo());
-		print "<tr><td colspan='2' align='center' class='bk'><b>domainl: $dom[0]</b></td></tr>";
+			$sth->bindParam(":id_field",$id_cat[$i]);
+			$sth->execute();//		$res=query($sql) or die (errorInfo());
+		print "<tr><td colspan='2' align='center' class='bk'><b>Field: ".$dom['field_name']."</b></td></tr>";
 		if ($sth->rowCount()==0)
 			{
 			print "<tr><td colspan='2' align='center' class='bk'>There are no ads!</td></tr>";
 			}
 		else
 			{
-			while ($row==$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
+			while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 				{
-				print "<tr><td align='right' class='bk'><a href='userinfo.php?user=$row[0]' target='_blank'>$row[0]</a></td><td class='bk'>$row[1]</td></tr>";
+					$sql1="SELECT username from users where ID_user=:id_user";
+					$sth=$dbh->prepare($sql1);
+					$sth->bindParam(":id_user",$row['id_user']);
+					$sth->execute();
+					$user = $sth->fetch(PDO::FETCH_ASSOC);
+				print "<tr><td>Username: <b>".$user['username']."</b></td><td align='right' class='bk'>".$row['ad_text']."</td></tr>";
 				}
 			}
 		}

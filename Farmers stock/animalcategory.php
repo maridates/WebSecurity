@@ -41,18 +41,19 @@ else
 	for ($i=0;$i<$j;$i++)
 		{
 		$sql="select `field_name` from `field` where id_field=:id_field";
-			$sth->bindParam(":id_field",$id_cat[$i]);
 			$sth=$dbh->prepare($sql);
+			$sth->bindParam(":id_field",$id_cat[$i]);
 			$sth->execute();//$res=$sth->query($sql);
 		//$res=query($sql) or die (errorInfo());
 		$dom=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
-		$sql="select `username`, `ad_text` from `farmers_stock`.`ads`, `farmers_stock`.`users` where id_field=:id_field and ID_user=id_user";
-			$sth->bindParam(":id_field",$id_cat[$i]);
+			print_r($dom);
+		$sql="select `ad_text` from `farmers_stock`.`ads` where id_field=:id_field";
 			$sth=$dbh->prepare($sql);
+			$sth->bindParam(":id_field",$id_cat[$i]);
 			$sth->execute();
 			//$res=$sth->query($sql);
 		//$res=query($sql) or die (errorInfo());
-		print "<tr><td colspan='2' align='center' class='bk'><b>domainl: $dom[0]</b></td></tr>";
+		print "<tr><td colspan='2' align='center' class='bk'><b>Field: ".$dom['field_name']."</b></td></tr>";
 		if ($sth->rowCount()==0)
 			{
 			print "<tr><td colspan='2' align='center' class='bk'>No ads!</td></tr>";
