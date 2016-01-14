@@ -1,3 +1,6 @@
+<?php
+include "header.php";
+?>
 <style>
     body {
         background-repeat: no-repeat;
@@ -18,7 +21,7 @@
 
 </style>
 <body background="pictures/background.jpg">
-<p><a href="farmers_stock.php"> </a><a href="farmers_stock.php"><img src="pictures/back.PNG" width="53" height="55" border="0"></a></p>
+<p style="padding-top: 90px "><a href="farmers_stock.php"> </a><a href="farmers_stock.php"><img src="pictures/back.PNG" width="53" height="55" border="0"></a></p>
 <table  class="top" width="71%" border="0" align="center">
   <tr> 
     <td width="73%">

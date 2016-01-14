@@ -17,10 +17,8 @@ include "header.php";
 		</style>
 	</head>
 <body>
+<p style="padding-top: 90px"><a href="farmers_stock.php"><img src="pictures/back.png" width="61" height="60" border="0"></a></p>
 <?php
-include_once 'functions.php';
-sec_session_start();
-
 if (!isset($_SESSION['id_u']))
 {
 	die ("<p align='center' class='bk'>- Please login (1).</p>");
@@ -55,7 +53,6 @@ if (isset($_POST['logout']))
 {
 	unset ($_SESSION['id_u']);
 	unset ($_SESSION['user']);
-	//unset ($_SESSION['count']);
 	print "<meta http-equiv='refresh' content='0;url=farmers_stock.php'>";
 }
 if (isset($_POST['submit']))

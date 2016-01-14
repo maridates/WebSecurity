@@ -3,6 +3,7 @@ include_once 'functions.php';
 sec_session_start();
 ?>
 <link rel="shortcut icon" href="pictures/favicon.ico">
+<title>Farmer's Stock</title>
 <style>
     body {
         background-repeat: no-repeat;

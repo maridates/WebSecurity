@@ -3,6 +3,15 @@
 <head>
 	<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
+	body {
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
 .bk
 	{
 	background-color: #DFDFDF;
@@ -13,6 +22,7 @@
 	}
 </style>
 </head>
+<body background="pictures/background.jpg">
 <?php
 include_once ('functions.php');
 sec_session_start();
@@ -39,7 +49,6 @@ if (!trim($Password))
 	$sth->execute();
 	if($sth->rowCount()==0)
 		{
-		print $sth->queryString;
 		print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error 1 -</p>");
 		print "<meta http-equiv='refresh' content='2;url=$previous'>";
 		die();

@@ -1,34 +1,41 @@
 <?
-session_start();
+sec_session_start();
 ?><head>
 	<title>Management</title>
 	<link rel="shortcut icon" href="pictures/favicon.ico">
 	<style>
+		body {
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		table.top {
+			bgcolor= #ADFF2F;
+			margin-top: 18%;
+		}
+		p.one {
+			margin-right: 50px;
+			margin-left: 50px;
+		}
+
 		.bk
 		{
-			background-color: #DFDFDF;
+			background-color: #ADFF2F;
 		}
 		.bkl
 		{
-			background-color: #AFAFAF;
+			background-color: #ADFF2F;
 		}
 	</style>
 </head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<body bgcolor="#999999" onload="document.login.adm.focus();">
+<body background="pictures/background.jpg" onload="document.login.adm.focus();">
 <?
-if (strlen($_SESSION[count])==0)
-{
-	$_SESSION[count]=0;
-}
-else
-{
-	if ($_SESSION[count]>2)
-	{
-		die();
-	}
-}
 if (!isset($_SESSION[adm]))
 {
 	if (isset ($_POST[submit]))
@@ -36,10 +43,8 @@ if (!isset($_SESSION[adm]))
 		include "connect_db.php";
 		$sql="select * from farmers_stoch.admin";
 		$sth=$dbh->prepare($sql);
-		//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 		$sth->execute();
 		$res=$sth->fetchAll();
-		//$res=query($sql) or die (errorInfo());
 		if ($sth->rowCount()==0)
 		{
 			die();
@@ -54,16 +59,15 @@ if (!isset($_SESSION[adm]))
 			{
 				$adm=$_POST[adm];
 				$pss=$_POST[pss];
-				$pss=hash("sha256",$pss);
-				$row = $sth->fetch(PDO::FETCH_ASSOC);//$row=mysql_fetch_row($res);
+				$salt=$row['salt'];
+				$pss=hash("sha256",$salt.$pss);
+				$row = $sth->fetch(PDO::FETCH_ASSOC);
 				if ($row[0]!=$adm)
 				{
-					$_SESSION[count]++;
 					die("<meta http-equiv='refresh' content='0;url=trouble.php'>");
 				}
 				if ($row[1]!=$pss)
 				{
-					$_SESSION[count]++;
 					die("<meta http-equiv='refresh' content='0;url=trouble.php'>");
 				}
 				$_SESSION[adm]=$row[0];
@@ -112,7 +116,6 @@ $sql="select * from `farmers_stock`.`admin`";
 $sth=$dbh->prepare($sql);
 $sth->execute();
 $res=$sth->query($sql);
-//$res=query($sql) or die (errorInfo());
 if ($sth->rowCount()==0)
 {
 	die();
@@ -125,7 +128,7 @@ else
 	}
 	else
 	{
-		$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res) or die();
+		$row=$sth->fetch(PDO::FETCH_ASSOC);
 		if ($_SESSION[adm]!=$row[0])
 		{
 			die();
@@ -160,8 +163,8 @@ default:
 			$sql="select id_field, field_name from farmers_stock.field";
 			$sth=$dbh->prepare($sql);
 			$sth->execute();
-			$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
-			while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
+			$res=$sth->query($sql);
+			while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
 				print "<a href='trouble.php?action=ads&domain=$row[0]'>$row[1]</a><br />";
 			}
@@ -176,7 +179,7 @@ default:
 				$sth->bindParam(":id",$id);
 				$sth=$dbh->prepare($sql);
 				$sth->execute();
-				$res=$sth->query($sql);//query($sql) or die (errorInfo());
+				$res=$sth->query($sql);
 				print "<meta http-equiv='refresh' content='0;url=trouble.php?action=ads&domain=$domain'>";
 				die();
 			}
@@ -185,13 +188,13 @@ default:
 			$sth=$dbh->prepare($sql);
 			$sth->bindParam(":domain",$domain);
 			$sth->execute();
-			$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
+			$res=$sth->query($sql);
 			print "<table class='bkl'>";
 			if ($sth->rowCount()==0)
 				print "<tr><td class='bk' align='center'>No ads!</td></tr>";
 			else
 			{
-				while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
+				while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 				{
 					print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=ads&domain=$domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_anunt' value='Delete'></td></form></tr>";
 				}
@@ -210,14 +213,14 @@ default:
 			$sth=$dbh->prepare($sql);
 			$sth->bindParam(":id",$id);
 			$sth->execute();
-			$res=$sth->query($sql);//query($sql) or die (errorInfo());
+			$res=$sth->query($sql);
 			print "<meta http-equiv='refresh' content='0;url=trouble.php?action=requests'>";
 			die();
 		}
 		$sql="select add, ID_req from farmers_stock.requests";
 		$sth=$dbh->prepare($sql);
 		$sth->execute();
-		$res=$sth->query($sql);//$res=query($sql) or die(errorInfo());
+		$res=$sth->query($sql);
 		print "<table class='bkl'>";
 		if ($sth->rowCount()==0)
 		{
@@ -225,7 +228,7 @@ default:
 		}
 		else
 		{
-			while($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
+			while($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
 				print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=requests&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_request' value='Delete'></td></form></tr>";
 			}
@@ -256,11 +259,10 @@ default:
 			$sth->bindParam(":id",$id);
 			$sth=$dbh->prepare($sql);
 			$sth->execute();
-			//query($sql) or die (errorInfo());
 			$sql="delete from ads where id_field=:id";
 			$sth->bindParam(":id",$id);
 			$sth=$dbh->prepare($sql);
-			$sth->execute();//query($sql) or die (errorInfo());
+			$sth->execute();
 			print "<meta http-equiv='refresh' content='0;url=trouble.php?action=domain'>";
 			die();
 		}
@@ -269,7 +271,6 @@ default:
 		$sth=$dbh->prepare($sql);
 		$sth->execute();
 		$res=$sth->query($sql);
-		//$res=query($sql) or die(errorInfo());
 		if ($sth->rowCount()==0)
 		{
 			print "<tr><td class='bk' align='center'>There are no fields!</td></tr>";
@@ -277,7 +278,7 @@ default:
 		else
 		{
 			print "<tr><td class='bk' align='center' colspan='2'><b>Fields:</b></td></tr>";
-			while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($res))
+			while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
 				print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_dom' value='Delete'></td></form></tr>";
 			}
@@ -294,19 +295,16 @@ default:
 			$sth->bindParam(":id",$id);
 			$sth=$dbh->prepare($sql);
 			$sth->execute();
-			//query($sql) or die (errorInfo());
 			$sql="delete from ads where id_user=:id";
 			$sth->bindParam(":id",$id);
 			$sth=$dbh->prepare($sql);
 			$sth->execute();
-			//query($sql) or die (errorInfo());
 			print "<meta http-equiv='refresh' content='0;url=trouble.php?action=users'>";
 			die();
 		}
 		$sql="select username, ID_user from users";
 		$sth=$dbh->prepare($sql);
 		$sth->execute();
-		//$res=query($sql) or die(errorInfo());
 		print "<table class='bkl'>";
 		if ($sth->rowCount()==0)
 		{
@@ -314,7 +312,7 @@ default:
 		}
 		else
 		{
-			while($row=$sth->fetch(PDO::FETCH_ASSOC))//;mysql_fetch_row($res))
+			while($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
 				print "<tr><td class='bk'><a href='userinfo.php?user=$row[0]' target='_blank'>$row[0]</a></td><form action='trouble.php?action=users&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_pers' value='Delete'></td></form></tr>";
 			}
