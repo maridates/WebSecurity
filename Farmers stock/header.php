@@ -1,3 +1,6 @@
+<style>
+    input{height:20px;vertical-align:middle;}
+</style>
 <div id="fixedheader">
 <?php
 /**
@@ -30,12 +33,14 @@ if (!isset($_SESSION['User']))
 }else{
     print('<div align="right" id="login">
             <table>
-                    <td colspan="2" align="center">Logged in as: '.$_SESSION['User'].'</td>
+                   <tr></tr>
+                    <td align="center">Logged in as: '.$_SESSION['User'].'</td>
                     <td align="right">
                         <form action="header.php" method="post">
                             <input type="submit" name="logout" value="Logout">
                         </form>
                     </td>
+                    </tr>
             </table>
         </div>');
 }

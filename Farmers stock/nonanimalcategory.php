@@ -56,13 +56,16 @@ else
 			{
 			while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 				{
-					$sql1="SELECT username from users where ID_user=:id_user";
-					$sth=$dbh->prepare($sql1);
-					$sth->bindParam(":id_user",$row['id_user']);
-					$sth->execute();
-					$user = $sth->fetch(PDO::FETCH_ASSOC);
-				print "<tr><td>Username: <b>".$user['username']."</b></td><td align='right' class='bk'>".$row['ad_text']."</td></tr>";
-				}
+					for($i=0;$i<$sth->rowCount();$i++){
+						$sql1="SELECT username from users where ID_user=:id_user";
+						$sth=$dbh->prepare($sql1);
+						$sth->bindParam(":id_user",$row['id_user']);
+						$sth->execute();
+						$user = $sth->fetch(PDO::FETCH_ASSOC);
+						print "<tr><td>Username: <b><a href='userinfo.php?user=".$row['id_user']."' target='_blank'>".$user['username']."</a></b></td><td align='right' class='bk'>".$row['ad_text']."</td></tr>";
+
+					}
+					}
 			}
 		}
 	print "</table>";
