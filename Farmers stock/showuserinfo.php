@@ -10,6 +10,7 @@ sec_session_start();
 $login_session = $_GET['user'];
 
 ?>
+<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
     body {
         background-repeat: no-repeat;
@@ -30,7 +31,7 @@ $login_session = $_GET['user'];
 <body background="pictures/background.jpg">
 <b> Welcome: <i> <?php echo $login_session; ?></i></b>
 <br>
-<table class="bkl" align="center">
+<table class="top" align="center">
     <tr>
         <td align="center" class="bk" colspan="2"><b>User Info</b></td>
     </tr>

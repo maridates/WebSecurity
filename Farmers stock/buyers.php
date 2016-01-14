@@ -2,6 +2,7 @@
 include_once 'functions.php';
 sec_session_start();
 ?>
+<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
     body {
         background-repeat: no-repeat;
@@ -23,8 +24,14 @@ sec_session_start();
         height: 15vw;
         width: 15vw;
     }
+    img.no{
+        height: 5vw;
+        width: 5vw;
+    }
 </style>
 <body background="pictures/background.jpg">
+<p><a href="farmers_stock.php"><img class = 'no' src="pictures/back.png" width="61" height="60" border="0"></a></p>
+
 <div align="center">
 
 <h1>Buy your products here</h1>

@@ -4,6 +4,7 @@ include "header.php";
 	<html>
 	<head>
 		<title>Add announcement</title>
+		<link rel="shortcut icon" href="pictures/favicon.ico">
 		<style>
 			.bk
 			{

@@ -25,7 +25,7 @@ include "header.php";
 
 </style>
 <body background="pictures/background.jpg" >
-<div align="center">
+<div align="center" style="padding-top: 25px ">
   <h1>Farmers Stock</h1>
     <h2>Here you can buy local farmers stock</h2>
 

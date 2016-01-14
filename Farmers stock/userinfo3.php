@@ -8,6 +8,7 @@ if (!trim($usr))
 ?>
 <head>
 <title>User: <? echo $usr; ?></title>
+	<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
 .bk
 	{

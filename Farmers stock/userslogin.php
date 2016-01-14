@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<title>Login</title>
+	<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
 .bk
 	{

@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Add your announcement</title>
+	<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
 .bk
 	{

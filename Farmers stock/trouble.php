@@ -2,6 +2,7 @@
 session_start();
 ?><head>
 	<title>Management</title>
+	<link rel="shortcut icon" href="pictures/favicon.ico">
 	<style>
 		.bk
 		{

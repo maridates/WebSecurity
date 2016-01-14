@@ -1,6 +1,7 @@
 <style>
     input{height:20px;vertical-align:middle;}
 </style>
+<link rel="shortcut icon" href="pictures/favicon.ico">
 <div id="fixedheader">
 <?php
 /**
