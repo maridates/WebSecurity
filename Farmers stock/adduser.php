@@ -94,10 +94,7 @@ if (!isset ($_POST['submit']))
 		$sth=$dbh->prepare($sql);
 		$sth->bindParam(":username", $username);
 		$sth->execute();
-		//$res=$sth->fetchAll();
-		//$res = $sth->fetchAll(PDO::FETCH_ASSOC);
 		$sth->fetchAll(PDO::FETCH_ASSOC);
-		//$res=query($sql) or die (errorInfo()); $stmt->rowCount()
 		if ($sth->rowCount()!==0)
 		{
 			print "<p align='center' class='bk'>Username already registered !<br />- ERROR -</p>";
@@ -158,14 +155,12 @@ if (!isset ($_POST['submit']))
 			$sth->bindParam(":Address", $Address);
 			$sth->bindParam(":phone", $phone);
 			$sth->bindParam(":salt", $salt);
-			//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 			$sth->execute();
 		}
 		catch ( PDOException $exception )
 		{
 			echo "PDO error :" . $exception->getMessage();
 		}
-		//query($interogare) or die (errorInfo());
 		print '<p align="center" class="bk">The data were inserted!';
 		print '<br /><a href="javascript:parent.close();">Close window -  go to your account</a></p>';
 	}

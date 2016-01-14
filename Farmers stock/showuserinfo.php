@@ -44,7 +44,6 @@ $login_session = $_GET['user'];
 
     if ($sth->rowCount()==0)
     {
-       // die("Problem ");
         print "<meta http-equiv='refresh' content='0;url=sellers.php'>";
     }
     else
@@ -53,7 +52,7 @@ $login_session = $_GET['user'];
         {
             die ("<p align='center' class='bkl'>Database error.</p>");
         }
-        $row=$sth->fetchAll();//mysql_fetch_row($res);
+        $row=$sth->fetchAll();
     }
     ?>
 

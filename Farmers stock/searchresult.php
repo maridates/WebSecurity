@@ -33,8 +33,6 @@ if( $field_search!="")
      $interogare = $interogare."WHERE `ad_text` LIKE '%".$field_search."%'";
 $sth=$dbh->prepare($interogare);
 $sth->execute();
-//$rez=$sth->query($interogare);
-//$rez = query ($interogare);
 $nrRez = $sth->rowCount();
 if($nrRez == 0)
    echo "Nothing to show!";
@@ -49,21 +47,17 @@ else
 		<td class='bk'>Ad</td>
 	</tr>
 	";
-	while ($row=$sth->fetch(PDO::FETCH_ASSOC))//mysql_fetch_row($rez))
+	while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 		{
 		$sql="select username from users where ID_user=:id_user";
 		$sth=$dbh->prepare($sql);
 		$sth->bindParam(":id_user",$row[0]['ID_user']);
 		$sth->execute();
-		//$res=$sth->query($sql);
-		//$res=query($sql) or die (errorInfo());
-		$pers=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
+		$pers=$sth->fetch(PDO::FETCH_ASSOC);
 		$sql="select `field_name` from `farmers_stock`.`field` where `id_field`=".$row[0];
 		$sth=$dbh->prepare($sql);
 		$sth->execute();
-		//$res=$sth->query($sql);
-		//$res=query($sql) or die (errorInfo());
-		$domain=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res) or die (errorInfo());
+		$domain=$sth->fetch(PDO::FETCH_ASSOC);
 		print "<tr>";
 		print "<td class='bk'><a href='userinfo.php?user=$pers[0]' target='_blank'>".$pers[0]."</td>";
 		print "<td class='bk'>".$domain[0]."</td>";

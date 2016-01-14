@@ -19,7 +19,7 @@ sec_session_start();
 
 $previous =$_SERVER['HTTP_REFERER'];
 $User = filter_input(INPUT_POST, 'User', FILTER_SANITIZE_STRING);
-$Password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);//$_POST['Password'];
+$Password=filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
 if (!trim($User))
 	{
 	print ("<p align='center' class='bk'>You have to insert the username!<br />- Error -</p>");
@@ -36,7 +36,6 @@ if (!trim($Password))
 	$sql="select `ID_user`, `username`, `Password`, `salt` from `farmers_stock`.`users` where `username`=:username";
 	$sth=$dbh->prepare($sql);
 	$sth->bindParam(":username",$User);
-	//$sth->bindParam(":username", $_SESSION["username"],PDO::PARAM_STR);
 	$sth->execute();
 	if($sth->rowCount()==0)
 		{
@@ -53,14 +52,13 @@ if (!trim($Password))
 			print "<meta http-equiv='refresh' content='2;url=$previous'>";
 			die();
 			}
-			$row = $sth->fetch(PDO::FETCH_ASSOC);//$row=mysql_fetch_row($result);
+			$row = $sth->fetch(PDO::FETCH_ASSOC);
 
 		$salt=$row['salt'];
 		$Password=hash("sha256",$salt.$Password);
 
 		if ($Password!=$row['Password'])
 			{
-			//$_SESSION['count']++;
 			print ("<p align='center' class='bk'>Incorrect User or Password!<br />- Error 3 -</p>");
 			print "<meta http-equiv='refresh' content='2;url=$previous'>";
 			die();
@@ -70,9 +68,8 @@ if (!trim($Password))
 		$_SESSION['id_u']=$row['ID_user'];
 		$_SESSION['User']=$row['username'];
 		$login_session=$_SESSION['User'];
-		//print_r($_SESSION);
+
 		print "<meta http-equiv='refresh' content='0;url=$previous'>";
-			//print "<meta http-equiv='refresh' content='0;url=showuserinfo.php?user=$login_session'>";
 
 		}
 ?>

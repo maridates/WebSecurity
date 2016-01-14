@@ -1,4 +1,4 @@
-<title>MD5 Hash Generator</title>
+<title>Hash Generator</title>
 <?
 if (!isset($_POST[sub]))
 	{

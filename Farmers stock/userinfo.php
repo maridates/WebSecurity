@@ -32,7 +32,7 @@ $sql="select last_name, first_name, address, phone from farmers_stock.users wher
 $sth->bindParam(":username",$usr);
 $sth=$dbh->prepare($sql);
 $sth->execute();
-$res=$sth->query($sql);//$res=query($sql) or die (errorInfo());
+$res=$sth->query($sql);
 if ($sth->rowCount()==0)
 	{
 	die();
@@ -43,7 +43,7 @@ else
 		{
 		die ("<p align='center' class='bkl'>Database error.</p>");
 		}
-	$row=$sth->fetch(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
+	$row=$sth->fetch(PDO::FETCH_ASSOC);
 	}
 ?>
 <tr>

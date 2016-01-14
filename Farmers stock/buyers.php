@@ -1,7 +1,6 @@
 <?php
 include_once 'functions.php';
 sec_session_start();
-//$_SESSION['field_search']= $_POST['field_search'];
 ?>
 <style>
     body {

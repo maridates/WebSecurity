@@ -28,7 +28,6 @@ $sql="select `ID_user` from `users` where username=:sess";
 $sth=$dbh->prepare($sql);
 $sth->bindParam(":sess",$_SESSION['User']);
 $sth->execute();
-//$res=$sth->query($sql) or die("<p align='center' class='bk'>Database error.</p>");
 if ($sth->rowCount()==0)
 	{
 	die("<p align='center' class='bk'>- ERROR - on connecting to database (3).</p>");
@@ -39,8 +38,7 @@ else
 		{
 		die("<p align='center' class='bk'>- Error in the database.</p>");
 		}
-	$row=$sth->fetchALL(PDO::FETCH_ASSOC);//mysql_fetch_row($res);
-		print_r($row);
+	$row=$sth->fetchALL(PDO::FETCH_ASSOC);
 	if ($row[0]['ID_user']!=$_SESSION['id_u'])
 		{
 		die("<p align='center' class='bk'>- ERROR - on connecting to database. (4)</p>");
@@ -64,10 +62,9 @@ $sth->bindParam(":id_field",$id_domain);
 $sth->bindParam(":sess",$_SESSION['id_u']);
 $sth->bindParam(":ad",$anunt);
 $sth->execute();
-//query($q);
 ?>
 <body bgcolor="#CCCCCC">
-<p> Your ad was succesful added.</p>
+<p> Your ad was successfully added.</p>
 <p>Thank you for choosing us.</p>
 <a href="farmers_stock.php">Homepage</a>
 <br>
