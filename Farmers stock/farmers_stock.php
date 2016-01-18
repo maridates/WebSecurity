@@ -40,5 +40,5 @@ include "header.php";
   </table>
   <p>For complaints and suggestions please contact us <a href="contact.php">here</a>
   </p>
-  <p><a href="trouble.php">ADMIN </a>Mary&#8482;</p>
+  <p><!--a href="trouble.php">ADMIN </a> -->Group number X&#8482;</p>
 </div>
