@@ -8,16 +8,39 @@ include "header.php";
 		<style>
 			.bk
 			{
-				background-color: #DFDFDF;
+				background-color: #ADFF2F;
 			}
 			.bkl
 			{
 				background-color: #AFAFAF;
 			}
+			body {
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-position: center;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			table.top {
+				margin-top: 10%;
+			}
+			p.one {
+				margin-right: 50px;
+				margin-left: 50px;
+			}
+			img{
+				height: 15vw;
+				width: 15vw;
+			}
+			img.no{
+				height: 5vw;
+				width: 5vw;
+			}
 		</style>
 	</head>
-<body>
-<p style="padding-top: 90px"><a href="farmers_stock.php"><img src="pictures/back.png" width="61" height="60" border="0"></a></p>
+<body background="pictures/background.jpg">
 <?php
 if (!isset($_SESSION['id_u']))
 {
@@ -65,7 +88,7 @@ if (isset($_POST['submit']))
 	print "<meta http-equiv='refresh' content='0;url=add.php'>";
 }
 ?>
-	<p class="bkl" align="center">Add your announcement</p>
+	<p style="padding-top: 35px" class="bkl" align="center">Add your announcement</p>
 	<hr align="center" color="#000000" width="100%">
 	<form name=adaug action="addeffect.php" method='post'>
 		<table>
@@ -86,7 +109,7 @@ if (isset($_POST['submit']))
 				</select>
 				<TR>
 					<TD> Description of your ad:
-					<TD><textarea name='anunt' cols="100" rows="10"></textarea></td>
+					<TD><textarea style=" background-color: #e2e4f3" name='anunt' cols="100" rows="10"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type='submit' value='Add your announcement'></td>

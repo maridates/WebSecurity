@@ -4,6 +4,7 @@
 <title>Farmer's Stock</title>
 <link rel="shortcut icon" href="pictures/favicon.ico">
 <div id="fixedheader">
+    <a class = "block" href="farmers_stock.php"><img class="no" src="pictures/farmers_stock.png" width="61" height="60"/> </a>
     <?php
     /**
      * Created by PhpStorm.
@@ -19,7 +20,7 @@
     if (!isset($_SESSION['User']))
     {
         print('
-    <form action="userslogin.php" method="post" name="username">
+    <form class = "block right" action="userslogin.php" method="post" name="username">
         <div align="right" id="login">
             <table>
                 <tr>
@@ -33,7 +34,7 @@
             </table>
         </div>
     </form>
-    <form action="register.php" method="post">
+    <form class = "register" action="register.php" method="post">
          <div align="right" id="login">
             <table>
                 <tr>
@@ -44,7 +45,7 @@
     </form>
 ');
     }else{
-        print('<div align="right" id="login">
+        print('<div class="block right" align="right" id="login">
             <table>
                    <tr></tr>
                     <td align="center">Logged in as: '.$_SESSION['User'].'</td>
@@ -65,12 +66,27 @@
         padding-right: 20px;
     }
     div#fixedheader {
-        position: fixed;
+        position: fixed ;
         top: 0px;
         left: 0px;
         width: 100%;
         color: #2B6C00;
         background: #2B6C00;
         padding: 5px;
+    }
+    img.no{
+        height: 5vw;
+        width: 5vw;
+    }
+    .block {
+        display: inline-block;
+    }
+    .right{
+        float: right;
+    }
+    .register{
+        margin-top: -20px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
     }
 </style>

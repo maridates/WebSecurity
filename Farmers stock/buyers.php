@@ -1,4 +1,5 @@
 <?php
+include "header.php";
 include_once 'functions.php';
 sec_session_start();
 ?>
@@ -15,7 +16,7 @@ sec_session_start();
         background-size: cover;
     }
     table.top {
-        margin-top: 18%;
+        margin-top: 10%;
     }
     p.one {
         margin-right: 50px;
@@ -31,9 +32,7 @@ sec_session_start();
     }
 </style>
 <body background="pictures/background.jpg">
-<p><a href="farmers_stock.php"><img class = 'no' src="pictures/back.png" width="61" height="60" border="0"></a></p>
-
-<div align="center">
+<div align="center" style="padding-top: 20px">
 
 <h1>Buy your products here</h1>
 <table class="top" border="0" align="center">

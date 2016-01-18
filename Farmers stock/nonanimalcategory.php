@@ -1,3 +1,6 @@
+<?php
+include "header.php";
+?>
 <HTML>
 <HEAD>
 	<TITLE>Plant products</TITLE>
@@ -36,8 +39,8 @@
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
 <body  background="pictures/background.jpg">
+<div  style="padding-top: 80px; padding-left: 40px" >
 <?php
-print "<p><a href='farmers_stock.php'>Home</a> <a href='buyers.php'>Buyers</a></p>";
 include "connect_db.php";
 $sql="select `id_field` from `farmers_stock`.`field` where `field_type`='2'";
 $sth=$dbh->prepare($sql);
@@ -92,5 +95,6 @@ else
 	print "</table>";
 }
 ?>
+	<div>
 </body>
 </html>
