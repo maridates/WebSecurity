@@ -1,6 +1,8 @@
+<?php include "header.php";
+?>
 <html>
 <?php
-$usr=$_GET['user'];
+$usr=htmlspecialchars($_GET['user']);
 if (!trim($usr))
 	{
 	die ();
@@ -21,19 +23,17 @@ if (!trim($usr))
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
 <body bgcolor="#CCCCCC">
-</body>
-<p align="center" class="bk"><button onclick="javascript:parent.close();">Close</button></p>
+<p style="padding-top: 80px;" align="center" class="bk"><button onclick="javascript:parent.close();">Close</button></p>
 <table class="bkl" align="center">
 <tr>
 	<td align="center" class="bk" colspan="2"><b>User Info</b></td>
 </tr>
-<?
+<?php
 include "connect_db.php";
-$sql="select last_name, first_name, address, phone from farmers_stock.users where username=:username";
-$sth->bindParam(":username",$usr);
+$sql="select last_name, first_name, address, phone from farmers_stock.users where ID_user=:user";
 $sth=$dbh->prepare($sql);
+$sth->bindParam(":user",$usr);
 $sth->execute();
-$res=$sth->query($sql);
 if ($sth->rowCount()==0)
 	{
 	die();
@@ -44,24 +44,24 @@ else
 		{
 		die ("<p align='center' class='bkl'>Database error.</p>");
 		}
-	$row=$sth->fetch(PDO::FETCH_ASSOC);
+	$row=$sth->fetchALL(PDO::FETCH_ASSOC);
 	}
 ?>
 <tr>
-	<td align="right" class="bk">Name:</td>
-	<td class="bk">&nbsp;<? echo $row[0]; ?></td>
+	<td align="right" class="bk">Last name:</td>
+	<td class="bk">&nbsp;<?php echo $row[0]['last_name']; ?></td>
 </tr>
 <tr>
-	<td align="right" class="bk">Surname:</td>
-	<td class="bk">&nbsp;<? echo $row[1]; ?></td>
+	<td align="right" class="bk">First name:</td>
+	<td class="bk">&nbsp;<?php echo $row[0]['first_name']; ?></td>
 </tr>
 <tr>
-	<td align="right" class="bk">Adress:</td>
-	<td class="bk">&nbsp;<? echo $row[2]; ?></td>
+	<td align="right" class="bk">Address:</td>
+	<td class="bk">&nbsp;<?php echo $row[0]['address']; ?></td>
 </tr>
 <tr>
 	<td align="right" class="bk">Phone:</td>
-	<td class="bk">&nbsp;<? echo $row[3]; ?></td>
+	<td class="bk">&nbsp;<?php echo $row[0]['phone']; ?></td>
 	
 </tr>
 </table>
