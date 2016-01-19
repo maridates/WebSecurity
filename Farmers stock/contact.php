@@ -21,8 +21,7 @@ include "header.php";
 
 </style>
 <body background="pictures/background.jpg">
-<p style="padding-top: 90px "><a href="farmers_stock.php"> </a><a href="farmers_stock.php"><img src="pictures/back.PNG" width="53" height="55" border="0"></a></p>
-<table  class="top" width="71%" border="0" align="center">
+<table style="padding-top: 60px;"  class="top" width="71%" border="0" align="center">
   <tr> 
     <td width="73%">
 <p align="center"><font color="#FFFFFF" size="4" face="Comic Sans MS"><strong>Online Suport</strong></font></p>

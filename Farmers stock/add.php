@@ -117,11 +117,11 @@ if (isset($_POST['submit']))
 		</table>
 	</form>
 	<hr>
-<?php
-$sql="select `ID_req`, `ID_field`, `ad_text` from `farmers_stoch`.`ads` where id_user=:ID_user";
-$sth=$dbh->prepare($sql);
-$sth->bindParam(":ID_user", $_SESSION['id_u'],PDO::PARAM_INT);
-$sth->execute();
+<?php //`ID_req`, for requests
+$sql1="select `ID_field`, `ad_text` from `ads` where id_user=:ID_user ORDER BY `ID_field` ASC";
+$sth1=$dbh->prepare($sql1);
+$sth1->bindParam(":ID_user", $_SESSION['id_u'],PDO::PARAM_INT);
+$sth1->execute();
 if ($sth->rowCount()==0)
 {
 	die("You have no ad published.");
@@ -130,15 +130,17 @@ else
 {
 	print "Existing ads:";
 }
-while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+while ($row1 = $sth1->fetchALL(PDO::FETCH_ASSOC))
 {
-	print "<hr>";
-	$sql="select field_name from field where ID_field=:id_field";
-	$sth=$dbh->prepare($sql);
-	$sth->bindParam(":id_field", $row['ID_field']);
-	$sth->execute();
-	$roq=$sth->fetch(PDO::FETCH_ASSOC);
-	print "<b>Field:</b> ".$roq[0]."<br /><b>Ad:</b>".$row[2]."<br /><br />";
-	print "<form action='add.php?id=$row[0]' method='post'><input type='submit' name='submit' value='Delete'></form>";
-}
+	for ($i=0; $i<$sth1->rowCount(); $i++) {
+		print "<hr>";
+		$sql = "select field_name from field where ID_field=:id_field";
+		$sth = $dbh->prepare($sql);
+		$sth->bindParam(":id_field", $row1[$i]['ID_field']);
+		$sth->execute();
+		$roq = $sth->fetch(PDO::FETCH_ASSOC);
+		print "<b>Field:</b> " . $roq['field_name'] . "<br /><b>Ad:</b>" . $row1[$i]['ad_text'] . "<br /><br />";
+		print "<form action='add.php?id=" . $row1[$i]['ID_field'] . "' method='post'><input type='submit' name='submit' value='Delete'></form>";
+	}
+	}
 ?>

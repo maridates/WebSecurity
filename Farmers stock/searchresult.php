@@ -18,27 +18,34 @@ $_SESSION['field_search'] = $_POST['field_search'];
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
+			color: #ffffff;
+			font-weight: 900;
 		}
 		table.top {
 			bgcolor= #ADFF2F;
 			margin-top: 18%;
+			color: #000000;
+			font-weight: 900;
 		}
 		p.one {
 			margin-right: 50px;
 			margin-left: 50px;
+			font-weight: 900;
 		}
 
 		.bk
 		{
-			background-color: #ADFF2F;
+			background:transparent;
+			font-weight: 900;
 		}
 		.bkl
 		{
-			background-color: #ADFF2F;
+			background:transparent;
+			font-weight: 900;
 		}
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
-<body background="pictures/background.jpg">
+<body background="pictures/background.jpg" >
 <div  style="padding-top: 80px; padding-left: 40px" >
 	<H1 align="center"><font color="#FFFFFF" size="5" face="Comic Sans MS">Show result on search </font></H1>
 	<HR width="80%">
@@ -58,7 +65,7 @@ $_SESSION['field_search'] = $_POST['field_search'];
 		echo "Nothing to show!";
 	else
 	{
-		echo "We have found <b> $nrRez </b> products:<BR>";
+		echo " We have found <b> $nrRez </b> products:<BR>";
 		echo "<TABLE class='bkl'>";
 		print "
 	<tr>
