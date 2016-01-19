@@ -41,6 +41,7 @@ include "header.php";
 		</style>
 	</head>
 <body background="pictures/background.jpg">
+	<div style="padding-top: 80px;">
 <?php
 if (!isset($_SESSION['id_u']))
 {
@@ -144,3 +145,6 @@ while ($row1 = $sth1->fetchALL(PDO::FETCH_ASSOC))
 	}
 	}
 ?>
+		</div>
+</body>
+	</html>
