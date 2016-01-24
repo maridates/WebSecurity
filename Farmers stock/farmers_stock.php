@@ -12,7 +12,7 @@ include "header.php";
     background-size: cover;
   }
   table.top {
-      margin-top: 18%;
+      margin-top: 10%;
   }
   p.one {
     margin-right: 50px;
@@ -32,7 +32,7 @@ include "header.php";
   <table border="0" class="top">
     <tr>
         <td width="50%"><div align="center"><a href="buyers.php"><p class = one><img src="pictures/1.png"></p></a></div></td>
-        <td width="50%"><div align="center"><a href="add.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
+        <td width="50%"><div align="center"><a href="sell.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
     </tr>
       <tr>
       <td>&nbsp;</td>

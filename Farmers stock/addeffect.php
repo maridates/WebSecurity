@@ -1,8 +1,27 @@
+<?php include "header.php";
+?>
 <html>
 <head>
 <title>Add your announcement</title>
 	<link rel="shortcut icon" href="pictures/favicon.ico">
 <style>
+	body {
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	img{
+		height: 15vw;
+		width: 15vw;
+	}
+	img.no{
+		height: 5vw;
+		width: 5vw;
+	}
 .bk
 	{
 	background-color: #DFDFDF;
@@ -64,7 +83,7 @@ $sth->bindParam(":sess",$_SESSION['id_u']);
 $sth->bindParam(":ad",$anunt);
 $sth->execute();
 ?>
-<body bgcolor="#CCCCCC">
+<body background="pictures/background.jpg">
 <p> Your ad was successfully added.</p>
 <p>Thank you for choosing us.</p>
 <a href="farmers_stock.php">Homepage</a>

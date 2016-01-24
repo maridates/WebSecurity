@@ -30,6 +30,10 @@ sec_session_start();
         height: 5vw;
         width: 5vw;
     }
+    img.fix{
+        height: 53px;
+        width: 193px;
+    }
 </style>
 <body background="pictures/background.jpg">
 <div align="center" style="padding-top: 20px">
@@ -52,6 +56,10 @@ sec_session_start();
         </form>
       </div></td>
   </tr>
+    <tr>
+        <td width="50%"><div align="center"><h2>Add your request here:</h2></div></td>
+        <td width="50%"><div align="center"><a href="addrequest.php"><p class = one><img class = fix src="pictures/request.png" ></p></a></div></td>
+    </tr>
 </table>
 </div>
 
