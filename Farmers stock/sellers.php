@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Login</title>
+  <title>Login</title>
   <link rel="shortcut icon" href="pictures/favicon.ico">
   <style>
     body {
@@ -20,36 +20,36 @@
     }
     .bk
     {
-        background-color: #DFDFDF;
+      background-color: #DFDFDF;
     }
     .bkl
     {
-        background-color: #AFAFAF;
+      background-color: #AFAFAF;
     }
   </style><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head><body background="pictures/background.jpg">
 <div align="center">
   <table class="top" width="50%" border="0">
-    <tr> 
+    <tr>
       <td>
         <P class="one" align="center"><font face="Comic Sans MS" size="42">Sell your products here</font></P>
-        <p align="center"> <font face="Comic Sans MS"><strong>If you have an account you can <em>login</em> else you can <em>register for free</em>!</strong></font> 
+        <p align="center"> <font face="Comic Sans MS"><strong>If you have an account you can <em>login</em> else you can <em>register for free</em>!</strong></font>
           <button onclick="javascript:window.open('adduser.php');">Register</button>
         </p>
-        <form action="userslogin.php" method="post" name="username">
-          <div align="center"> 
+        <form action="userslogin.php" method="post" name="username" autocomplete="off">
+          <div align="center">
             <table class="bkl">
-              <tr> 
+              <tr>
                 <td colspan="2" align="center" class="bk">Login</td>
               </tr>
-              <tr> 
+              <tr>
                 <td align="right" class="bk">User:</TD>
                 <td class="bk">&nbsp; <input name="User" type="text"></TD>
               </TR>
-              <tr> 
+              <tr>
                 <td align="right" class="bk">Password:</td>
                 <td class="bk">&nbsp; <input name="Password" type="password"></td>
               </tr>
-              <tr> 
+              <tr>
                 <td colspan="2" align="center"  class="bk"><input type="submit" name="submit" value="Login"></td>
               </tr>
             </table>
@@ -57,6 +57,6 @@
         </form></td>
     </tr>
   </table>
-<p>&nbsp;</p></div>
+  <p>&nbsp;</p></div>
 </body>
 </html>

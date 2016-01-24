@@ -35,7 +35,7 @@ include "header.php";
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
 <body background="pictures/background.jpg">
-<form action="adduser.php" method="post">
+<form action="adduser.php" method="post" autocomplete="off">
     <table align="center" class="top">
         <tr>
             <td colspan="2" align="center" class="bkl"><b>Register</b></td>
@@ -75,9 +75,10 @@ include "header.php";
             <TD colspan="2" align="center" class="bkl"><input type="submit" value="Validate" name="submit"></TD>
         </TR>
     </table>
-    <p align="center"><font face="Comic Sans MS">Register Instructions </font></p>
-    <p align="center"><font face="Comic Sans MS">In order to insert an ad you have to be registered</font></p>
-    <p align="center"><font face="Comic Sans MS">Your username /
-            Password will remain strictly confidential</font></p>
+</form>
+<p align="center"><font face="Comic Sans MS">Register Instructions </font></p>
+<p align="center"><font face="Comic Sans MS">In order to insert an ad you have to be registered</font></p>
+<p align="center"><font face="Comic Sans MS">Your username /
+        Password will remain strictly confidential</font></p>
 </body>
 </html>

@@ -91,7 +91,7 @@ include "header.php";
 	?>
 	<p style="padding-top: 5px" class="bkl" align="center">Add your announcement</p>
 	<hr align="center" color="#000000" width="100%">
-	<form name=adaug action="addeffect.php" method='post'>
+	<form name=adaug action="addeffect.php" method='post' autocomplete="off">
 		<table>
 			<TD align="right">Field:</TD>
 			<TD><select name="ID_field">
@@ -119,11 +119,11 @@ include "header.php";
 	</form>
 	<hr>
 	<?php //`ID_req`, for requests
-	$sql1="select `ID_field`, `ad_text` from `ads` where id_user=:ID_user ORDER BY `ID_field` ASC";
+	$sql1="select `ID_field`, `ad_text`, `ID_ad` from `ads` where id_user=:ID_user ORDER BY `ID_field` ASC";
 	$sth1=$dbh->prepare($sql1);
 	$sth1->bindParam(":ID_user", $_SESSION['id_u'],PDO::PARAM_INT);
 	$sth1->execute();
-	if ($sth->rowCount()==0)
+	if ($sth1->rowCount()==0)
 	{
 		die("You have no ad published.");
 	}
@@ -141,7 +141,7 @@ include "header.php";
 			$sth->execute();
 			$roq = $sth->fetch(PDO::FETCH_ASSOC);
 			print "<b>Field:</b> " . $roq['field_name'] . "<br /><b>Ad:</b>" . $row1[$i]['ad_text'] . "<br /><br />";
-			print "<form action='add.php?id=" . $row1[$i]['ID_field'] . "' method='post'><input type='submit' name='submit' value='Delete'></form>";
+			print "<form autocomplete=\"off\" action='delete.php?id_ad=" . $row1[$i]['ID_ad'] . "' method='post'><input type='submit' name='submit' value='Delete'></form>";
 		}
 	}
 	?>

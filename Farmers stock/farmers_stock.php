@@ -12,29 +12,29 @@ include "header.php";
     background-size: cover;
   }
   table.top {
-      margin-top: 10%;
+    margin-top: 10%;
   }
   p.one {
     margin-right: 50px;
     margin-left: 50px;
   }
   img{
-      height: 15vw;
-      width: 15vw;
+    height: 15vw;
+    width: 15vw;
   }
 
 </style>
 <body background="pictures/background.jpg" >
 <div align="center" style="padding-top: 90px ">
   <h1>Farmers Stock</h1>
-    <h2>Here you can buy local farmers stock</h2>
+  <h2>Here you can buy local farmers stock</h2>
 
   <table border="0" class="top">
     <tr>
-        <td width="50%"><div align="center"><a href="buyers.php"><p class = one><img src="pictures/1.png"></p></a></div></td>
-        <td width="50%"><div align="center"><a href="sell.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
+      <td width="50%"><div align="center"><a href="buyers.php"><p class = one><img src="pictures/1.png"></p></a></div></td>
+      <td width="50%"><div align="center"><a href="sell.php"><p class = one><img src="pictures/2.png" ></p></a></div></td>
     </tr>
-      <tr>
+    <tr>
       <td>&nbsp;</td>
     </tr>
   </table>

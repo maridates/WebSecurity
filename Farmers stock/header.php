@@ -20,7 +20,7 @@
     if (!isset($_SESSION['User']))
     {
         print('
-    <form class = "block right" action="userslogin.php" method="post" name="username">
+    <form class = "block right" action="userslogin.php" method="post" name="username" autocomplete="off">
         <div align="right" id="login">
             <table>
                 <tr>
@@ -34,7 +34,7 @@
             </table>
         </div>
     </form>
-    <form class = "register" action="register.php" method="post">
+    <form class = "register" action="register.php" method="post" autocomplete="off">
          <div align="right" id="login">
             <table>
                 <tr>
@@ -50,7 +50,7 @@
                    <tr></tr>
                     <td align="center">Logged in as: '.$_SESSION['User'].'</td>
                     <td align="right">
-                        <form action="header.php" method="post">
+                        <form action="header.php" method="post" autocomplete="off">
                             <input type="submit" name="logout" value="Logout">
                         </form>
                     </td>

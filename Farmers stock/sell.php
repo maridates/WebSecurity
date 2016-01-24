@@ -47,7 +47,7 @@ include "header.php";
     <table border="0" class="top">
         <tr>
             <td colspan="2" style="color: #ffffff;"><div align="center"><h2 >Here you can choose if you want to see all the requests buyers added on the website <br> or <br> you can add your advertise/announcement.</h2>
-           </div> </td>
+                </div> </td>
         </tr>
         <tr>
             <td width="50%"><div align="center"><a href="showrequest.php"><p class = one><img class = fix src="pictures/show.png"></p></a></div></td>

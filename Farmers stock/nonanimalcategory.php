@@ -40,61 +40,61 @@ include "header.php";
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
 <body  background="pictures/background.jpg">
 <div  style="padding-top: 80px; padding-left: 40px" >
-<?php
-include "connect_db.php";
-$sql="select `id_field` from `farmers_stock`.`field` where `field_type`='2'";
-$sth=$dbh->prepare($sql);
-$sth->execute();
-if ($sth->rowCount()==0)
-{
-	print "There are no domains with plant products";
-}
-else
-{
-	$j=$sth->rowCount();
-	for ($i=0;$i<$j;$i++)
+	<?php
+	include "connect_db.php";
+	$sql="select `id_field` from `farmers_stock`.`field` where `field_type`='2'";
+	$sth=$dbh->prepare($sql);
+	$sth->execute();
+	if ($sth->rowCount()==0)
 	{
-		$row=$sth->fetch(PDO::FETCH_ASSOC);
-		$id_cat[$i]=$row['id_field'];
+		print "There are no domains with plant products";
 	}
-	print "<table class='bkl'>";
-	print "<tr><td align='right' class='bk'><b>User:</b></td><td class='bk'><b>Ad:</b></td></tr>";
-	for ($i=0;$i<$j;$i++)
+	else
 	{
-		$sql="select `field_name` from `farmers_stock`.`field` where id_field=:id_field";
-		$sth1=$dbh->prepare($sql);
-		$sth1->bindParam(":id_field",$id_cat[$i]);
-		$sth1->execute();
-		$dom=$sth1->fetch(PDO::FETCH_ASSOC);
-		$sql="select `ad_text`, `id_user` from `ads` where id_field=:id_field";
-		$sth2=$dbh->prepare($sql);
-		$sth2->bindParam(":id_field",$id_cat[$i]);
-		$sth2->execute();
-		print "<tr><td colspan='2' align='center' class='bk'><b>Field: &nbsp; &nbsp; ".$dom['field_name']."</b></td></tr>";
-		$count1 = $sth2->rowCount();
-		if ($sth2->rowCount()==0)
+		$j=$sth->rowCount();
+		for ($i=0;$i<$j;$i++)
 		{
-			print "<tr><td colspan='2' align='center' class='bk'>There are no ads!</td></tr>";
+			$row=$sth->fetch(PDO::FETCH_ASSOC);
+			$id_cat[$i]=$row['id_field'];
 		}
-		else
+		print "<table class='bkl'>";
+		print "<tr><td align='right' class='bk'><b>User:</b></td><td class='bk'><b>Ad:</b></td></tr>";
+		for ($i=0;$i<$j;$i++)
 		{
-			while ($row=$sth2->fetchALL(PDO::FETCH_ASSOC))
+			$sql="select `field_name` from `farmers_stock`.`field` where id_field=:id_field";
+			$sth1=$dbh->prepare($sql);
+			$sth1->bindParam(":id_field",$id_cat[$i]);
+			$sth1->execute();
+			$dom=$sth1->fetch(PDO::FETCH_ASSOC);
+			$sql="select `ad_text`, `id_user` from `ads` where id_field=:id_field";
+			$sth2=$dbh->prepare($sql);
+			$sth2->bindParam(":id_field",$id_cat[$i]);
+			$sth2->execute();
+			print "<tr><td colspan='2' align='center' class='bk'><b>Field: &nbsp; &nbsp; ".$dom['field_name']."</b></td></tr>";
+			$count1 = $sth2->rowCount();
+			if ($sth2->rowCount()==0)
 			{
-				for($i=0;$i<$count1;$i++){
-					$sql1="SELECT username from users where ID_user=:id_user";
-					$sth3=$dbh->prepare($sql1);
-					$sth3->bindParam(":id_user",$row[$i]['id_user']);
-					$sth3->execute();
-					$user = $sth3->fetch(PDO::FETCH_ASSOC);
-					print "<tr><td>Username: <b><a href='userinfo.php?user=".$row[$i]['id_user']."' target='_blank'>".$user['username']."</a></b></td><td align='right' class='bk'>".$row[$i]['ad_text']."</td></tr>";
+				print "<tr><td colspan='2' align='center' class='bk'>There are no ads!</td></tr>";
+			}
+			else
+			{
+				while ($row=$sth2->fetchALL(PDO::FETCH_ASSOC))
+				{
+					for($i=0;$i<$count1;$i++){
+						$sql1="SELECT username from users where ID_user=:id_user";
+						$sth3=$dbh->prepare($sql1);
+						$sth3->bindParam(":id_user",$row[$i]['id_user']);
+						$sth3->execute();
+						$user = $sth3->fetch(PDO::FETCH_ASSOC);
+						print "<tr><td>Username: <b><a href='userinfo.php?user=".$row[$i]['id_user']."' target='_blank'>".$user['username']."</a></b></td><td align='right' class='bk'>".$row[$i]['ad_text']."</td></tr>";
 
+					}
 				}
 			}
 		}
+		print "</table>";
 	}
-	print "</table>";
-}
-?>
+	?>
 	<div>
 </body>
 </html>

@@ -80,7 +80,7 @@ if (!isset($_SESSION[adm]))
 	{
 		?>
 		<p align='center' class='bk'><a href='.'>Index</p>
-		<form action='trouble.php' method='post' name='login'>
+		<form action='trouble.php' method='post' name='login' autocomplete="off">
 			<table align='center' class='bkl'>
 				<tr><td colspan='2' align='center' class='bk'><b>Login</b></td></tr>
 				<tr>
@@ -140,7 +140,7 @@ else
 	}
 }
 ?>
-<form action='trouble.php' method='post'>
+<form action='trouble.php' method='post' autocomplete="off">
 	<input type='submit' name='logout' value='Logout'>
 </form>
 
@@ -196,7 +196,7 @@ default:
 			{
 				while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 				{
-					print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=ads&domain=$domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_anunt' value='Delete'></td></form></tr>";
+					print "<tr><td class='bk'>$row[0]</td><form autocomplete=\"off\" action='trouble.php?action=ads&domain=$domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_anunt' value='Delete'></td></form></tr>";
 				}
 			}
 
@@ -230,7 +230,7 @@ default:
 		{
 			while($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
-				print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=requests&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_request' value='Delete'></td></form></tr>";
+				print "<tr><td class='bk'>$row[0]</td><form autocomplete=\"off\" action='trouble.php?action=requests&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_request' value='Delete'></td></form></tr>";
 			}
 		}
 		print "</table>";
@@ -240,7 +240,7 @@ default:
 		print "<a href='trouble.php'>Home</a><br/></br />";
 		if (!isset ($_POST[add]))
 		{
-			print "Add:<br/><form action='trouble.php?action=domain' method='post'><input type='text' name='dom'><select name='tip'><option value='1'>Animal</option><option value='2'>Vegetal</option></select><input type='submit' name='add' value='Add'></form><hr>";
+			print "Add:<br/><form autocomplete=\"off\" action='trouble.php?action=domain' method='post'><input type='text' name='dom'><select name='tip'><option value='1'>Animal</option><option value='2'>Vegetal</option></select><input type='submit' name='add' value='Add'></form><hr>";
 		}
 		else
 		{
@@ -280,7 +280,7 @@ default:
 			print "<tr><td class='bk' align='center' colspan='2'><b>Fields:</b></td></tr>";
 			while ($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
-				print "<tr><td class='bk'>$row[0]</td><form action='trouble.php?action=domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_dom' value='Delete'></td></form></tr>";
+				print "<tr><td class='bk'>$row[0]</td><form autocomplete=\"off\" action='trouble.php?action=domain&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_dom' value='Delete'></td></form></tr>";
 			}
 		}
 		print "</table>";
@@ -314,7 +314,7 @@ default:
 		{
 			while($row=$sth->fetch(PDO::FETCH_ASSOC))
 			{
-				print "<tr><td class='bk'><a href='userinfo.php?user=$row[0]' target='_blank'>$row[0]</a></td><form action='trouble.php?action=users&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_pers' value='Delete'></td></form></tr>";
+				print "<tr><td class='bk'><a href='userinfo.php?user=$row[0]' target='_blank'>$row[0]</a></td><form autocomplete=\"off\" action='trouble.php?action=users&id=$row[1]' method='post'><td class='bk'><input type='submit' name='del_pers' value='Delete'></td></form></tr>";
 			}
 		}
 		print "</table>";

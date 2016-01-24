@@ -28,14 +28,14 @@ include "header.php";
 <table width="100%"border="1" cellspacing="0" cellpadding="0">
 </table>
 <div style="padding-top: 80px;">
-<FORM name="formrequests" method="post" action="addrequestresult.php">
-  <P><font color="#FFFFFF" size="5" face="Comic Sans MS"><strong>Add your request</strong></font>
-  <P> 
-    <INPUT type="text" name="anunt" size="150" maxlength="150">
-    <BR>
-<P> <INPUT type="submit" name="trimit" value="Submit">
-<INPUT type="reset" name="sterg" value="Reset">
-</FORM>
-  </div>
+  <FORM name="formrequests" method="post" action="addrequestresult.php" autocomplete="off">
+    <P><font color="#FFFFFF" size="5" face="Comic Sans MS"><strong>Add your request</strong></font>
+    <P>
+      <INPUT type="text" name="anunt" size="150" maxlength="150">
+      <BR>
+    <P> <INPUT type="submit" name="trimit" value="Submit">
+      <INPUT type="reset" name="sterg" value="Reset">
+  </FORM>
+</div>
 </BODY>
 </HTML> 
