@@ -28,13 +28,13 @@
 <body background="pictures/background.jpg">
 
 <?php
-$username=$_POST['username'];
-$Password=$_POST['Password'];
-$Password2=$_POST['Password2'];
-$Surname=$_POST['Surname'];
-$Firstname=$_POST['Firstname'];
-$Address=$_POST['Address'];
-$phone=$_POST['phone'];
+$username=htmlentities($_POST['username']);
+$Password=htmlentities($_POST['Password']);
+$Password2=htmlentities($_POST['Password2']);
+$Surname=htmlentities($_POST['Surname']);
+$Firstname=htmlentities($_POST['Firstname']);
+$Address=htmlentities($_POST['Address']);
+$phone=htmlentities($_POST['phone']);
 if(!trim($username))
 {
 	print ("<p align='center' class='bk'>You have to insert USERNAME !<br />- ERROR -</p>");

@@ -7,7 +7,7 @@
  */
 include_once 'functions.php';
 sec_session_start();
-$login_session = $_GET['user'];
+$login_session = htmlentities($_GET['user']);
 
 ?>
 <link rel="shortcut icon" href="pictures/favicon.ico">

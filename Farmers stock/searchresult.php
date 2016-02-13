@@ -52,7 +52,7 @@ $_SESSION['field_search'] = htmlentities( $_POST['field_search']);
 	<div style="padding-left: 140px" >
 		<?php
 
-		$field_search =$_SESSION['field_search'];
+		$field_search = htmlentities($_SESSION['field_search']);
 		echo "We are looking for: <b>".$field_search."</b><BR>";
 		include "connect_db.php";
 		$interogare = "SELECT `id_field`, `ID_user`, `ad_text` FROM `ads` ";

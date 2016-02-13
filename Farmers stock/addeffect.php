@@ -64,7 +64,7 @@ else
 		die("<p align='center' class='bk'>- ERROR - on connecting to database. (4)</p>");
 	}
 }
-$id_domain=$_POST['ID_field'];
+$id_domain = htmlentities($_POST['ID_field']);
 $anunt = htmlentities($_POST['anunt']);
 if (!trim($id_domain))
 {
